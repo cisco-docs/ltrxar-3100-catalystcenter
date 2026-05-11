@@ -1,0 +1,158 @@
+---
+objects:
+  - name: Area
+    template: area
+    folder: sites
+    paths: [catalyst_center.sites.areas]
+  - name: Building
+    template: building
+    folder: sites
+    paths: [catalyst_center.sites.buildings]
+  - name: Floor
+    template: floor
+    folder: sites
+    paths: [catalyst_center.sites.floors]
+  - name: Network
+    template: network
+    folder: network_settings
+    paths: [catalyst_center.network_settings.network]
+  - name: AAA Servers
+    template: aaa_servers
+    folder: network_settings
+    paths: [catalyst_center.network_settings.aaa_servers]
+  - name: Telemetry
+    template: telemetry
+    folder: network_settings
+    paths: [catalyst_center.network_settings.telemetry]
+  - name: Device Credentials
+    template: device_credentials
+    folder: network_settings
+    paths: [catalyst_center.network_settings.device_credentials]
+  - name: IP Pool
+    template: ip_pool
+    folder: network_settings
+    paths: [catalyst_center.network_settings.ip_pools]
+  - name: Authentication and Policy Servers
+    template: authentication_and_policy_servers
+    folder: system_settings
+    paths: [catalyst_center.system_settings.authentication_and_policy_servers]
+  - name: Switching Network Profiles
+    template: switching_network_profiles
+    folder: network_profiles
+    paths: [catalyst_center.network_profiles.switching]
+  - name: Wireless Network Profiles
+    template: wireless_network_profiles
+    folder: network_profiles
+    paths: [catalyst_center.network_profiles.wireless]
+  - name: Wireless Profile Site Tags
+    template: wireless_profile_site_tags
+    folder: network_profiles
+    paths: [catalyst_center.network_profiles.wireless]
+  - name: Wireless Profile Policy Tags
+    template: wireless_profile_policy_tags
+    folder: network_profiles
+    paths: [catalyst_center.network_profiles.wireless]
+  - name: Projects
+    template: project
+    folder: templates
+    paths: [catalyst_center.templates.projects]
+  - name: Templates
+    template: template
+    folder: templates
+    paths: [catalyst_center.templates.projects.dayn_templates]
+  - name: Tags
+    template: tag
+    folder: templates
+    paths: [catalyst_center.templates.tags]
+  - name: Transit
+    template: transit
+    folder: fabric
+    paths: [catalyst_center.fabric.transits]
+  - name: Fabric Sites
+    template: fabric_site
+    folder: fabric
+    paths: [catalyst_center.fabric.fabric_sites]
+  - name: L3 Virtual Network
+    template: layer_3_virtual_network
+    folder: fabric
+    paths: [catalyst_center.fabric.l3_virtual_networks]
+  - name: Extranet Policy
+    template: extranet_policy
+    folder: fabric
+    paths: [catalyst_center.fabric.extranet_policies]
+  - name: L2 Virtual Network
+    template: layer_2_virtual_network
+    folder: fabric
+    paths: [catalyst_center.fabric.fabric_sites.l2_virtual_networks]
+  - name: Anycast Gateway
+    template: anycast_gateway
+    folder: fabric
+    paths: [catalyst_center.fabric.fabric_sites.anycast_gateways]
+  - name: SSID Mapping to VLAN
+    template: ssid_mapping_to_vlan
+    folder: fabric
+    paths: [catalyst_center.fabric.fabric_sites.wireless_ssids]
+  - name: Fabric Multicast
+    template: multicast
+    folder: fabric
+    paths: [catalyst_center.fabric.fabric_sites.multicast]
+  - name: Border Device
+    template: border_device
+    folder: fabric
+    paths: [catalyst_center.fabric.border_devices]
+  - name: Layer 3 Handoff
+    template: layer_3_handoff
+    folder: fabric
+    paths: [catalyst_center.fabric.border_devices.l3_handoffs]
+  - name: Layer 2 Handoff
+    template: layer_2_handoff
+    folder: fabric
+    paths: [catalyst_center.fabric.border_devices.l2_handoffs]
+  - name: Port Assignment
+    template: port_assignment
+    folder: fabric
+    paths: [catalyst_center.inventory.devices.port_assignments]
+  - name: Device
+    template: device
+    folder: inventory
+    paths: [catalyst_center.inventory.devices]
+  - name: Assign Device to Site
+    template: assign_device_to_site
+    folder: inventory
+    paths: [catalyst_center.inventory.devices.state]
+  - name: Discovery
+    template: discovery
+    folder: inventory
+    paths: [catalyst_center.inventory.discovery]
+  - name: Wireless Interface
+    template: interface
+    folder: wireless
+    paths: [catalyst_center.wireless.interfaces]
+  - name: RF Profile
+    template: rf_profile
+    folder: wireless
+    paths: [catalyst_center.wireless.rf_profiles]
+  - name: SSID
+    template: ssid
+    folder: wireless
+    paths: [catalyst_center.wireless.ssids]
+  - name: 802.11be Profile
+    template: dot11be_profile
+    folder: wireless
+    paths: [catalyst_center.wireless.dot11be_profiles]
+  - name: AP Profile
+    template: ap_profile
+    folder: wireless
+    paths: [catalyst_center.wireless.ap_profiles]
+  - name: Power Profile
+    template: power_profile
+    folder: wireless
+    paths: [catalyst_center.wireless.power_profiles]
+  - name: Anchor Group
+    template: anchor_group
+    folder: wireless
+    paths: [catalyst_center.wireless.anchor_groups]
+  - name: LAN Automation
+    template: lan_automation
+    folder: lan_automation
+    paths: [catalyst_center.lan_automation]

@@ -1,0 +1,34 @@
+---
+catalyst_center:
+  network_profiles:
+    switching:
+      - name: NP_SWITCHING
+        sites:
+          - Global/AREA_0
+          - Global/AREA_1/AREA_2
+        dayn_templates:
+          - ACL_TEMPLATE
+          - PROJECT1#Day_N_remove_bfd
+          - PROJECT3#Day_N_remove_bfd
+    wireless:
+      - name: NP_WIRELESS
+        sites:
+          - Global/AREA_0
+          - Global/AREA_1
+        ssid_details:
+          - name: SSID_WPA3_PERSONAL
+            enable_fabric: true
+            dot11be_profile_name: "WiFi7_HighPerf"
+          - name: Guest_EXT_WEB_AUTH
+            enable_fabric: false
+            dot11be_profile_name: "WiFi7_HighPerf"
+            interface_name: Gi1/0/3
+            anchor_group_name: "AG_Guest"
+        additional_interfaces:
+          - Gi1/0/2
+        ap_zones:
+          - name: AP_ZONE
+            rf_profile_name: BASIC_PROFILE_1
+            ssids:
+            - SSID_WPA3_PERSONAL
+            - Guest_EXT_WEB_AUTH

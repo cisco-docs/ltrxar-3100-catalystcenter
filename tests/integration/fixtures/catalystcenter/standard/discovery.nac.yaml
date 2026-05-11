@@ -1,0 +1,48 @@
+---
+catalyst_center:
+  inventory:
+    discovery:
+      - name: Discovery1
+        type: Range
+        global_credential_list:
+          - CLI_USER
+        ip_address_list: "192.168.34.65-192.168.34.65"
+        preferred_mgmt_ip_method: UseLoopBack
+        protocol_order: SSH,Telnet
+        time_out: 6
+      - name: Discovery_Multi_Range
+        type: Multi Range
+        global_credential_list:
+          - CLI_USER
+          - API_READ_ACCESS
+          - API_WRITE_ACCESS
+          - SNMP_RO
+          - SNMP_WR
+        ip_address_list: '10.9.1.16-10.9.1.16,10.9.1.19-10.9.1.20'
+        preferred_mgmt_ip_method: UseLoopBack
+        protocol_order: SSH,Telnet
+        time_out: 300
+        retry: 3
+        netconf_port: "830"
+      - name: CRITICAL_DEVICE_DISCOVERY
+        type: Single
+        global_credential_list:
+          - CLI_USER
+          - API_READ_ACCESS
+          - API_WRITE_ACCESS
+          - SECURE_SNMPV3_AUTHPRIV
+        ip_address_list: "10.10.10.1"
+        preferred_mgmt_ip_method: None
+        protocol_order: SSH
+        time_out: 180
+      - name: LLDP_DEVICE_DISCOVERY
+        type: LLDP
+        global_credential_list:
+          - CLI_USER
+          - SECURE_SNMPV3_AUTHPRIV
+        ip_address_list: "10.10.30.1"
+        preferred_mgmt_ip_method: None
+        protocol_order: SSH,Telnet
+        time_out: 180
+        lldp_level: 3
+        retry: 2

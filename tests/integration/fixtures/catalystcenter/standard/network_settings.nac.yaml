@@ -1,0 +1,138 @@
+---
+catalyst_center:
+  network_settings:
+    device_credentials:
+      snmpv2_read_credentials:
+        - name: SNMP_RO
+          read_community: GlobalMonitorRead
+      snmpv2_write_credentials:
+        - name: SNMP_WR
+          write_community: GlobalConfigWrite
+      snmpv3_credentials:
+        - name: SECURE_SNMPV3_AUTHPRIV
+          auth_type: SHA
+          privacy_type: AES256
+          snmp_mode: AUTHPRIV
+          username: secureuser
+          auth_password: SecureAuth2024!
+          privacy_password: SecurePriv2024!
+      cli_credentials:
+        - name: CLI_USER
+          username: cisco1
+          password: Cisco123!
+          enable: cisco
+      https_read_credentials:
+        - name: API_READ_ACCESS
+          username: apiread
+          password: ApiRead2024!
+          port: 443
+      https_write_credentials:
+        - name: API_WRITE_ACCESS
+          username: apiwrite
+          password: ApiWrite2024!
+          port: 443
+    ip_pools:
+      - name: POOL_V4
+        ip_address_space: IPv4
+        ip_pool_cidr: 192.168.110.0/23
+        ip_pools_reservations:
+          - name: POOL_RESERVATION_V4_1
+            prefix_length: 26
+            subnet: 192.168.110.0
+            gateway: 192.168.110.1
+            dns_servers:
+              - 1.1.1.1
+            dhcp_servers:
+              - 1.1.1.1
+          - name: POOL_RESERVATION_V4_2
+            prefix_length: 26
+            subnet: 192.168.110.64
+            gateway: 192.168.110.65
+            dns_servers:
+              - 1.1.1.1
+            dhcp_servers:
+              - 1.1.1.1
+          - name: POOL_RESERVATION_V4_3
+            prefix_length: 26
+            subnet: 192.168.110.128
+            gateway: 192.168.110.129
+            dns_servers:
+              - 1.1.1.1
+            dhcp_servers:
+              - 1.1.1.1
+          - name: POOL_RESERVATION_V4_4
+            prefix_length: 26
+            subnet: 192.168.110.192
+            gateway: 192.168.110.193
+            dns_servers:
+              - 1.1.1.1
+            dhcp_servers:
+              - 1.1.1.1
+          - name: POOL_RESERVATION_V4_5
+            prefix_length: 26
+            subnet: 192.168.111.64
+          - name: POOL_RESERVATION_DUAL_STACK
+            prefix_length: 26
+            subnet: 192.168.111.0
+            gateway: 192.168.111.1
+      - name: POOL_V6
+        ip_address_space: IPv6
+        ip_pool_cidr: 2001:db8:aaaa::/48
+        ip_pools_reservations:
+          - name: POOL_RESERVATION_DUAL_STACK
+            prefix_length: 64
+            subnet: '2001:db8:aaaa:bbbb::'
+    network:
+      - name: NETWORK_SETTINGS_1
+        dhcp_servers:
+          - 22.0.0.1
+          - 22.0.0.2
+        dns_servers:
+          - 23.0.0.1
+          - 23.0.0.2
+        domain_name: cisco.eu
+        banner: "Welcome to the Cisco Lab"
+        timezone: Europe/Warsaw
+        ntp_servers:
+          - 24.0.0.1
+          - 24.0.0.2
+      - name: NETWORK_SETTINGS_2
+        dhcp_servers:
+          - 25.0.0.1
+          - 25.0.0.2
+        dns_servers:
+          - 26.0.0.1
+          - 26.0.0.2
+        domain_name: cisco.eu
+        banner: "Welcome to the Cisco Lab1"
+        timezone: Europe/Warsaw
+        ntp_servers:
+          - 27.0.0.1
+          - 27.0.0.2
+    telemetry:
+      - name: TELEMETRY_SETTINGS_1
+        wired_data_collection: true
+        enable_netflow_collector_on_devices: true
+        wireless_telemetry: true
+        catalyst_center_as_snmp_server: true
+        catalyst_center_as_syslog_server: false
+        catalyst_center_as_network_collector: false
+        netflow_collector_ip_address: 200.0.0.1
+        netflow_collector_port: 6500
+        syslog_servers:
+          - 20.0.0.1
+          - 20.0.0.2
+        snmp_servers:
+          - 21.0.0.1
+          - 21.0.0.2
+      - name: TELEMETRY_SETTINGS_2
+        wired_data_collection: true
+        enable_netflow_collector_on_devices: true
+        wireless_telemetry: true
+        catalyst_center_as_snmp_server: true
+        catalyst_center_as_syslog_server: true
+        catalyst_center_as_network_collector: false
+        netflow_collector_ip_address: 100.0.0.1
+        netflow_collector_port: 6500
+        syslog_servers:
+          - 20.0.0.1

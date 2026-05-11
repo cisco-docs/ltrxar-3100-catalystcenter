@@ -1,0 +1,23 @@
+---
+catalyst_center:
+  system_settings:
+    authentication_and_policy_servers:
+      aaa:
+        - ip_address: 10.0.0.1
+          shared_secret: C1sco12345
+          retries: 3
+          timeout: 4
+          protocols:
+            tacacs:
+              port: 49
+            radius:
+              authentication_port: 1812
+              accounting_port: 1813
+        - ip_address: 10.0.0.2
+          shared_secret: C1sco12345
+          retries: 3
+          timeout: 4
+          protocols:
+            radius:
+              authentication_port: 1812
+              accounting_port: 1813

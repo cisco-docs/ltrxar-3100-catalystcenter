@@ -1,0 +1,318 @@
+---
+catalyst_center:
+  wireless:
+    interfaces:
+      - name: Gi1/0/2
+        vlan_id: 200
+      - name: Gi1/0/3
+        vlan_id: 201
+    dot11be_profiles:
+      - name: "WiFi7_HighPerf"
+        ofdma_down_link: true
+        ofdma_up_link: true
+        mu_mimo_down_link: true
+        mu_mimo_up_link: true
+        ofdma_multi_ru: true
+    ssids:
+      - name: SSID_WPA3_PERSONAL
+        auth_type: WPA3_PERSONAL
+        passphrase: Cisco123
+        fast_lane: false
+        mac_filtering: false
+        ssid_radio_type: Triple Band
+        broadcast_ssid: true
+        fast_transition: ADAPTIVE
+        session_timeout_enable: true
+        session_timeout: 1800
+        client_exclusion: true
+        client_exclusion_timeout: 1800
+        basic_service_set_max_idle: true
+        basic_service_set_client_idle_timeout: 300
+        directed_multicast_service: true
+        neighbor_list: true
+        mft_client_protection: OPTIONAL
+        aaa_override: false
+        protected_management_frame: REQUIRED
+        rsn_cipher_suite_ccmp128: true
+        wlan_type: Enterprise
+        auth_key_sae_ext: true
+        ghz24_policy: dot11-g-only
+        hex: false
+        random_mac_filter: false
+      - name: 802_1X_SSID
+        wlan_type: Enterprise
+        ssid_radio_type: "2.4GHz and 5GHz"
+        ghz24_policy: dot11-bg-only
+        fast_lane: false
+        egress_qos: PLATINUM
+        ingress_qos: PLATINUM-UP
+        enabled: true
+        broadcast_ssid: true
+        auth_type: WPA2_WPA3_ENTERPRISE
+        ap_beacon_protection: true
+        fast_transition: ADAPTIVE
+        rsn_cipher_suite_ccmp128: true
+        auth_key8021x: true
+        auth_key8021x_sha256: true
+        aaa_override: true
+        mac_filtering: true
+        random_mac_filter: false
+        posturing: false
+        mft_client_protection: OPTIONAL
+        protected_management_frame: REQUIRED
+        neighbor_list: true
+        coverage_hole_detection: true
+        session_timeout_enable: true
+        session_timeout: 28800
+        client_exclusion: true
+        client_exclusion_timeout: 1800
+        basic_service_set_max_idle: true
+        basic_service_set_client_idle_timeout: 300
+        sleeping_client_timeout: 500
+        directed_multicast_service: true
+        nas_options: ["System IP Address"]
+        client_rate_limit: 1000000
+      - name: Guest_EXT_WEB_AUTH
+        wlan_type: Guest
+        ssid_radio_type: "2.4GHz and 6GHz"
+        ghz24_policy: dot11-bg-only
+        fast_lane: false
+        egress_qos: PLATINUM
+        ingress_qos: PLATINUM-UP
+        enabled: true
+        broadcast_ssid: true
+        auth_type: OPEN
+        fast_transition: ADAPTIVE
+        l3_auth_type: web_auth
+        auth_server: auth_external
+        external_auth_ip_address: "https://198.18.133.27/dummy.html"
+        aaa_override: true
+        mac_filtering: true
+        random_mac_filter: false
+        posturing: false
+        mft_client_protection: OPTIONAL
+        protected_management_frame: REQUIRED
+        neighbor_list: true
+        coverage_hole_detection: true
+        session_timeout_enable: true
+        session_timeout: 28800
+        client_exclusion: true
+        client_exclusion_timeout: 1800
+        basic_service_set_max_idle: true
+        basic_service_set_client_idle_timeout: 300
+        sleeping_client_timeout: 500
+        directed_multicast_service: true
+        nas_options: ["System IP Address"]
+        client_rate_limit: 10000
+      - name: PSK_SSID_Personal
+        wlan_type: Enterprise
+        ssid_radio_type: "2.4GHz"
+        ghz24_policy: dot11-bg-only
+        fast_lane: false
+        egress_qos: PLATINUM
+        ingress_qos: PLATINUM-UP
+        enabled: true
+        broadcast_ssid: true
+        auth_type: WPA2_WPA3_PERSONAL
+        ap_beacon_protection: true
+        passphrase: PSKPass123
+        fast_transition: ENABLE
+        rsn_cipher_suite_ccmp128: true
+        rsn_cipher_suite_gcmp256: true
+        auth_key_sae: true
+        auth_key_sae_ext_plus_ft: true
+        auth_key_psk: true
+        auth_key_psk_plus_ft: true
+        aaa_override: true
+        mft_client_protection: OPTIONAL
+        protected_management_frame: REQUIRED
+        neighbor_list: true
+        coverage_hole_detection: true
+        session_timeout_enable: true
+        session_timeout: 28800
+        client_exclusion: true
+        client_exclusion_timeout: 1800
+        basic_service_set_max_idle: true
+        basic_service_set_client_idle_timeout: 300
+        sleeping_client_timeout: 500
+        directed_multicast_service: true
+        nas_options: ["System IP Address"]
+        client_rate_limit: 10000
+      - name: PSK_SSID_ENTERPRISE
+        wlan_type: Enterprise
+        ssid_radio_type: "5GHz"
+        ghz24_policy: dot11-bg-only
+        fast_lane: false
+        egress_qos: PLATINUM
+        ingress_qos: PLATINUM-UP
+        enabled: true
+        broadcast_ssid: true
+        auth_type: WPA2_WPA3_ENTERPRISE
+        ap_beacon_protection: true
+        fast_transition: ENABLE
+        rsn_cipher_suite_ccmp128: true
+        rsn_cipher_suite_gcmp256: true
+        cckm: true
+        cckm_tsf_tolerance: 5000
+        auth_key8021x: true
+        auth_key8021x_sha256: true
+        auth_key_suite_b1921x: true
+        aaa_override: true
+        mac_filtering: true
+        posturing: false
+        mft_client_protection: OPTIONAL
+        protected_management_frame: REQUIRED
+        neighbor_list: true
+        coverage_hole_detection: true
+        session_timeout_enable: true
+        session_timeout: 28800
+        client_exclusion: true
+        client_exclusion_timeout: 1800
+        basic_service_set_max_idle: true
+        basic_service_set_client_idle_timeout: 300
+        sleeping_client_timeout: 500
+        directed_multicast_service: true
+        nas_options: ["System IP Address"]
+        client_rate_limit: 10000
+      - name: IPSK_SSID
+        wlan_type: Enterprise
+        ssid_radio_type: "2.4GHz and 6GHz"
+        ghz24_policy: dot11-bg-only
+        fast_lane: false
+        egress_qos: PLATINUM
+        ingress_qos: PLATINUM-UP
+        enabled: true
+        broadcast_ssid: true
+        auth_type: WPA2_WPA3_PERSONAL
+        ap_beacon_protection: true
+        passphrase: PSKPass123
+        fast_transition: ENABLE
+        rsn_cipher_suite_ccmp128: true
+        rsn_cipher_suite_gcmp256: true
+        auth_key_sae: true
+        auth_key_sae_ext_plus_ft: true
+        auth_key_psk: true
+        auth_key_psk_plus_ft: true
+        aaa_override: true
+        posturing: false
+        mft_client_protection: OPTIONAL
+        protected_management_frame: REQUIRED
+        neighbor_list: true
+        coverage_hole_detection: true
+        session_timeout_enable: true
+        session_timeout: 28800
+        client_exclusion: true
+        client_exclusion_timeout: 1800
+        basic_service_set_max_idle: true
+        basic_service_set_client_idle_timeout: 300
+        sleeping_client_timeout: 500
+        directed_multicast_service: true
+        nas_options: ["System IP Address"]
+        client_rate_limit: 10000
+      - name: 802_1X_SSID_FABRIC
+        wlan_type: Enterprise
+        ssid_radio_type: "Triple Band"
+        ghz24_policy: dot11-bg-only
+        fast_lane: false
+        egress_qos: PLATINUM
+        ingress_qos: PLATINUM-UP
+        enabled: true
+        broadcast_ssid: true
+        auth_type: WPA2_WPA3_PERSONAL
+        ap_beacon_protection: true
+        passphrase: PSKPass123
+        fast_transition: ENABLE
+        rsn_cipher_suite_ccmp128: true
+        rsn_cipher_suite_gcmp256: true
+        auth_key_sae: true
+        auth_key_sae_ext_plus_ft: true
+        auth_key_psk: true
+        auth_key_psk_plus_ft: true
+        aaa_override: true
+        posturing: false
+        mft_client_protection: OPTIONAL
+        protected_management_frame: REQUIRED
+        neighbor_list: true
+        coverage_hole_detection: true
+        session_timeout_enable: true
+        session_timeout: 28800
+        client_exclusion: true
+        client_exclusion_timeout: 1800
+        basic_service_set_max_idle: true
+        basic_service_set_client_idle_timeout: 300
+        sleeping_client_timeout: 500
+        directed_multicast_service: true
+        nas_options: ["System IP Address"]
+        client_rate_limit: 10000
+    ap_profiles:
+      - name: TEST_AP_PROFILE
+        description: Test AP profile for integration testing
+        awips_enabled: true
+        awips_forensic_enabled: true
+        rogue_detection: true
+        rogue_detection_min_rssi: -85
+        rogue_detection_report_interval: 60
+        pmf_denial_enabled: true
+        mesh_enabled: true
+        bridge_group_name: "Default"
+        backhaul_client_access: true
+        range: 12000
+        ghz5_backhaul_data_rates: 802.11ax
+        ghz24_backhaul_data_rates: 802.11n
+        rap_downlink_backhaul: "2.4 GHz"
+        calendar_power_profiles:
+          - power_profile: Low_Power_Profile
+            scheduler_type: DAILY
+            scheduler_start_time: "22:00"
+            scheduler_end_time: "06:00"
+        country_code: IN
+        time_zone: Delta from Controller
+        time_zone_offset_hour: 5
+        time_zone_offset_minutes: 30
+    rf_profiles:
+      - name: BASIC_PROFILE_1
+        enable_radio_type_a: true
+        enable_radio_type_b: false
+        enable_radio_type_c: false
+        radio_type_a_properties:
+          parent_profile: CUSTOM
+          radio_channels: 36,40,44,48,52,56,60,64,144,149,153,157,161,165,169,173
+          data_rates: 12,18,24,36,48,54
+          mandatory_data_rates: 12,24
+          power_threshold_v1: -60
+          rx_sop_threshold: LOW
+          min_power_level: 8
+          max_power_level: 30
+    power_profiles:
+      - name: "Low_Power_Profile"
+        description: "Low power mode for energy savings"
+        rules:
+          - interface_type: RADIO
+            interface_id: 6GHZ
+            parameter_type: STATE
+            parameter_value: DISABLE
+          - interface_type: ETHERNET
+            interface_id: GIGABITETHERNET0
+            parameter_type: SPEED
+            parameter_value: 1000MBPS
+          - interface_type: RADIO
+            interface_id: 5GHZ
+            parameter_type: SPATIALSTREAM
+            parameter_value: TWO_BY_TWO
+    anchor_groups:
+      - name: "AG_Guest"
+        mobility_anchors:
+          - device_name: EXT-WLC1
+            ip_address: 172.16.61.1
+            anchor_priority: PRIMARY
+            managed_anchor_wlc: false
+            peer_device_type: IOS-XE
+            mac_address: "aa:bb:cc:00:00:01"
+            mobility_group_name: default
+          - device_name: EXT-WLC2
+            ip_address: 172.16.61.2
+            anchor_priority: SECONDARY
+            managed_anchor_wlc: false
+            peer_device_type: IOS-XE
+            mac_address: "aa:bb:cc:00:00:02"
+            mobility_group_name: default

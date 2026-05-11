@@ -1,0 +1,17 @@
+---
+catalyst_center:
+  network_profiles:
+    wireless:
+      - name: NP_WIRELESS
+        site_tags:
+          - name: NP_WIRELESS_SITE_TAG
+            ap_profile_name: TEST_AP_PROFILE
+            sites:
+              - Global/AREA_0
+              - Global/AREA_1
+        policy_tags:
+          - name: ZONE_POLICY_TAG
+            ap_zones:
+              - AP_ZONE
+            sites:
+              - Global/AREA_0

@@ -1,0 +1,91 @@
+---
+catalyst_center:
+  fabric:
+    transits:
+      - name: BGP_TRANSIT
+        type: IP_BASED_TRANSIT
+        routing_protocol_name: BGP
+        autonomous_system_number: 65002
+    l3_virtual_networks:
+      - name: VN_1
+      - name: VN_2
+      - name: VN_3
+    fabric_sites:
+      - name: Global/AREA_0
+        authentication_template:
+          name: No Authentication
+        pub_sub_enabled: false
+        l2_virtual_networks:
+          - name: PRODUCTION_L2_VN
+            vlan_name: PRODUCTION_CONTROL
+            traffic_type: DATA
+            fabric_enabled_wireless: false
+            associated_l3_virtual_network_name: VN_3
+          - name: L2_SDA_VN_1
+            vlan_name: L2_VLAN_USERS
+            vlan_id: 23
+            traffic_type: DATA
+            fabric_enabled_wireless: true
+        l3_virtual_networks:
+          - VN_3
+        anycast_gateways:
+          - ip_pool_name: POOL_RESERVATION_V4_3
+            auto_generate_vlan_name: true
+            vlan_id: 222
+            traffic_type: DATA
+            l3_virtual_network: VN_3
+            multiple_ip_to_mac_addresses: true
+        fabric_zones:
+          - name: Global/AREA_0/BUILDING_0
+            authentication_template:
+              name: No Authentication
+            l3_virtual_networks:
+              - VN_3
+            anycast_gateways:
+              - POOL_RESERVATION_V4_3
+            l2_virtual_networks:
+              - L2_SDA_VN_1
+      - name: Global/AREA_1/AREA_2
+        authentication_template:
+          name: No Authentication
+        pub_sub_enabled: true
+        l3_virtual_networks:
+          - VN_1
+          - VN_2
+        l2_virtual_networks:
+          - name: PRODUCTION_L2_VN
+            vlan_name: PRODUCTION_CONTROL
+            vlan_id: 222
+            traffic_type: DATA
+            fabric_enabled_wireless: false
+            associated_l3_virtual_network_name: VN_1
+          - name: L2_SDA_VN_1
+            vlan_name: L2_VLAN_USERS
+            vlan_id: 223
+            traffic_type: DATA
+            fabric_enabled_wireless: true
+        anycast_gateways:
+          - ip_pool_name: POOL_RESERVATION_V4_1
+            auto_generate_vlan_name: true
+            traffic_type: DATA
+            l3_virtual_network: VN_1
+          - ip_pool_name: POOL_RESERVATION_V4_2
+            vlan_id: 400
+            vlan_name: VLAN_400
+            traffic_type: DATA
+            l3_virtual_network: VN_2
+            wireless_pool: true
+            ip_directed_broadcast: true
+            layer2_flooding: true
+            multiple_ip_to_mac_addresses: true
+        multicast:
+          replication_mode: NATIVE_MULTICAST
+          virtual_networks:
+            - name: VN_1
+              ip_pool_name: "POOL_RESERVATION_DUAL_STACK"
+              ipv4_ssm_ranges: ["232.0.0.0/24"]
+              multicast_rps:
+                - name: EXTERNAL_RP
+                  rp_location: EXTERNAL
+                  is_default_v4_rp: true
+                  ipv4_address: "20.1.1.100"

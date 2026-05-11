@@ -1,0 +1,46 @@
+---
+catalyst_center:
+  templates:
+    tags:
+      - name: TEMPLATE_TAG
+        description: Template Tag
+    projects:
+      - name: PROJECT
+        dayn_templates:
+          - name: ACL_TEMPLATE
+            description: ACL test template
+            device_types:
+              - product_family: "Switches and Hubs"
+                product_series: "Cisco Catalyst 9000 Series Virtual Switches"
+            software_type: IOS-XE
+            tags: [TEMPLATE_TAG]
+
+      - name: PROJECT1
+        dayn_templates:
+          - name: Day_N_remove_bfd
+            description: Remove BFD from C9kv p2P isis interafaces
+            language: JINJA
+            device_types:
+              - product_family: "Switches and Hubs"
+                product_series: "Cisco Catalyst 9000 Series Virtual Switches"
+            software_type: IOS-XE
+
+      - name: PROJECT2
+        dayn_templates:
+          - name: Day_N_remove_bfd
+            description: Remove BFD from C9kv p2P isis interafaces
+            language: JINJA
+            device_types:
+              - product_family: "Switches and Hubs"
+                product_series: "Cisco Catalyst 9000 Series Virtual Switches"
+            software_type: IOS-XE
+
+      - name: PROJECT3
+        dayn_templates:
+          - name: Day_N_remove_bfd
+            description: Remove BFD from C9kv p2P isis interafaces
+            language: VELOCITY
+            device_types:
+              - product_family: "Switches and Hubs"
+                product_series: "Cisco Catalyst 9000 Series Virtual Switches"
+            software_type: IOS-XE

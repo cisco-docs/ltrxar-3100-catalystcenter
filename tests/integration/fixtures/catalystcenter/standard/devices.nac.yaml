@@ -1,0 +1,77 @@
+# ---
+# catalyst_center:
+#   inventory:
+#     devices:
+#       - name: P3-BN1
+#         fqdn_name: P3-BN1.cisco.eu
+#         device_ip: 192.168.38.1
+#         pid: C9300-24P
+#         state: INIT
+#         device_role: ACCESS
+#         site: Global/MAX_AREA/MAX_BUILDING
+#         fabric_site: Global/MAX_AREA
+#         fabric_roles:
+#           - BORDER_NODE
+#           - CONTROL_PLANE_NODE
+#       - name: P3-BN2
+#         fqdn_name: P3-BN2.cisco.eu
+#         device_ip: 192.168.30.65
+#         pid: C9300-24P
+#         state: INIT
+#         device_role: ACCESS
+#         site: Global/MAX_AREA/MAX_BUILDING
+#         fabric_site: Global/MAX_AREA
+#         fabric_roles:
+#           - BORDER_NODE
+#           - CONTROL_PLANE_NODE
+#       - name: P3-EN1
+#         fqdn_name: P3-EN1.cisco.eu
+#         device_ip: 198.168.34.65
+#         pid: C9300-24P
+#         state: INIT
+#         device_role: ACCESS
+#         site: Global/MAX_AREA/MAX_BUILDING
+#         fabric_site: Global/MAX_AREA
+#         fabric_roles:
+#           - EDGE_NODE
+#         port_assignments:
+#           - interface_name: GigabitEthernet1/0/2
+#             connected_device_type: "USER_DEVICE"
+#             data_vlan_name: "vlan_1"
+#             authenticate_template_name: "No Authentication"
+#       - name: P3-EN2
+#         fqdn_name: P3-EN2.cisco.eu
+#         device_ip: 198.168.34.69
+#         pid: C9300-24P
+#         state: INIT
+#         device_role: ACCESS
+#         site: Global/MAX_AREA/MAX_BUILDING
+#         fabric_site: Global/MAX_AREA
+#         fabric_roles:
+#           - EDGE_NODE
+#         port_assignments:
+#           - interface_name: GigabitEthernet1/0/3
+#             connected_device_type: "USER_DEVICE"
+#             data_vlan_name: "vlan_2"
+#             authenticate_template_name: "No Authentication"
+#
+#       # RMA workflow example:
+#       # Step 1: Mark faulty device for replacement
+#       # - name: P3-EN3
+#       #   fqdn_name: P3-EN3.cisco.eu
+#       #   device_ip: 198.168.34.73
+#       #   pid: C9300-24P
+#       #   serial_number: FOC12345678
+#       #   state: MARK_FOR_REPLACEMENT
+#       #   device_role: ACCESS
+#       #   site: Global/MAX_AREA/MAX_BUILDING
+#       #
+#       # Step 2: Trigger replacement with new serial number
+#       # - name: P3-EN3
+#       #   fqdn_name: P3-EN3.cisco.eu
+#       #   device_ip: 198.168.34.73
+#       #   pid: C9300-24P
+#       #   serial_number: FOC87654321
+#       #   state: PROVISION
+#       #   device_role: ACCESS
+#       #   site: Global/MAX_AREA/MAX_BUILDING

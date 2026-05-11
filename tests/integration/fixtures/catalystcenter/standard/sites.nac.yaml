@@ -1,0 +1,56 @@
+---
+catalyst_center:
+  sites:
+    areas:
+      - name: Global
+        cli_credentials: CLI_USER
+        https_read_credentials: API_READ_ACCESS
+        https_write_credentials: API_WRITE_ACCESS
+        snmpv2_read_credentials: SNMP_RO
+        snmpv2_write_credentials: SNMP_WR
+        snmpv3_credentials: SECURE_SNMPV3_AUTHPRIV
+        network_settings:
+          network: NETWORK_SETTINGS_2
+      - name: AREA_0
+        parent_name: Global
+        ip_pools_reservations:
+          - POOL_RESERVATION_V4_3
+        network_settings:
+          telemetry: TELEMETRY_SETTINGS_2
+      - name: AREA_1
+        parent_name: Global
+      - name: AREA_2
+        ip_pools_reservations:
+          - POOL_RESERVATION_V4_1
+          - POOL_RESERVATION_V4_2
+          - POOL_RESERVATION_V4_4
+          - POOL_RESERVATION_DUAL_STACK
+        parent_name: Global/AREA_1
+      - name: AREA_3
+        ip_pools_reservations:
+          - POOL_RESERVATION_V4_5
+        parent_name: Global/AREA_1
+    buildings:
+      - name: BUILDING_0
+        country: Poland
+        address: Bujaka, 30-611 Krakow, Poland
+        parent_name: Global/AREA_0
+      - name: BUILDING_1
+        country: Poland
+        address: Powstancow Wielkopolskich, 30-707 Krakow, Poland
+        parent_name: Global/AREA_1/AREA_2
+        network_settings:
+          network: NETWORK_SETTINGS_1
+          telemetry: TELEMETRY_SETTINGS_1
+    floors:
+      - name: FLOOR_1
+        floor_number: 1
+        parent_name: Global/AREA_1/AREA_2/BUILDING_1
+      - name: FLOOR_2
+        floor_number: 2
+        height: 3
+        length: 20
+        rf_model: Cubes And Walled Offices
+        width: 20
+        units_of_measure: feet
+        parent_name: Global/AREA_1/AREA_2/BUILDING_1

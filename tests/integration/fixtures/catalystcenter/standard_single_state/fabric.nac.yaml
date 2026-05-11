@@ -1,0 +1,10 @@
+---
+catalyst_center:
+  fabric:
+    extranet_policies:
+      - name: EXTRANET_POLICY_1
+        provider_virtual_network: VN_1
+        subscriber_virtual_networks:
+          - VN_2
+        fabric_sites:
+          - Global/AREA_1/AREA_2

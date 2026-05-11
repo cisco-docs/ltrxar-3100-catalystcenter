@@ -1,0 +1,28 @@
+terraform {
+  required_providers {
+    catalystcenter = {
+      source  = "CiscoDevNet/catalystcenter"
+      {%- if branch_ref != 'dev' or provider_version %}
+      version = "~>{{ provider_version }}"
+      {%- endif %}
+    }
+  }
+}
+
+provider "catalystcenter" {
+  max_timeout = {{ max_timeout }}
+}
+
+module "catalyst_center" {
+  source = "git::https://www.github.com/netascode/terraform-catalystcenter-nac-catalystcenter.git?ref={{ branch_ref }}"
+
+  yaml_directories      = ["../standard", "../standard_multi_state"]
+  templates_directories = ["../standard/templates/"]
+
+  manage_global_settings     = false
+  managed_sites              = ["Global/AREA_0"]
+  manage_specific_sites_only = false
+  {%- if use_bulk_api is defined %}
+  use_bulk_api               = {{ use_bulk_api | lower }}
+  {%- endif %}
+}
