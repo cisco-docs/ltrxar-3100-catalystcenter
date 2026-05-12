@@ -3,27 +3,27 @@ catalyst_center:
   sites:
     areas:
       - name: Global
-      - name: Poland
+      - name: USA
         parent_name: Global
-      - name: Krakow
-        parent_name: Global/Poland
+      - name: Nevada
+        parent_name: Global/USA
+      - name: Las Vegas
+        parent_name: Global/USA/Nevada
         network_settings:
           aaa_servers: AAA_Settings
         ip_pools_reservations:
           - CampusVN-IPPool
           - GuestVN-IPPool
-          - PrintersVN-IPPool
-          - BYOD-IPPool
     buildings:
       - name: Bld A
-        latitude: 50.0623225
-        longitude: 19.937975
-        country: Poland
-        parent_name: Global/Poland/Krakow
+        latitude: 36.1699
+        longitude: -115.1398
+        country: United States
+        parent_name: Global/USA/Nevada/Las Vegas
     floors:
       - name: FLOOR_1
         floor_number: 1
-        parent_name: Global/Poland/Krakow/Bld A
+        parent_name: Global/USA/Nevada/Las Vegas/Bld A
       - name: FLOOR_2
         floor_number: 2
-        parent_name: Global/Poland/Krakow/Bld A
+        parent_name: Global/USA/Nevada/Las Vegas/Bld A

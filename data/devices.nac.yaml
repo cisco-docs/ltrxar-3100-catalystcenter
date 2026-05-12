@@ -1,26 +1,19 @@
 ---
+# BR10 (border node + control plane) is owned by multi-domain/catc/.
+# This repo declares only the SDA edge nodes EDGE01 and EDGE02 for the
+# standalone (Module 3) demo. The fabric site keeps the Campus + Guest VNs;
+# border handoff and transits are layered on by multi-domain/catc/.
 catalyst_center:
   inventory:
     devices:
-      - name: BR10
-        fqdn_name: BR10.cisco.eu
-        device_ip: 198.18.130.10
-        pid: C9KV-UADP-8P
-        state: INIT
-        device_role: BORDER ROUTER
-        site: Global/Poland/Krakow/Bld A
-        fabric_site: Global/Poland/Krakow
-        fabric_roles:
-          - BORDER_NODE
-          - CONTROL_PLANE_NODE
       - name: EDGE01
         fqdn_name: EDGE01.cisco.eu
         device_ip: 198.18.130.1
         pid: C9KV-UADP-8P
         state: INIT
         device_role: ACCESS
-        site: Global/Poland/Krakow/Bld A
-        fabric_site: Global/Poland/Krakow
+        site: Global/USA/Nevada/Las Vegas/Bld A
+        fabric_site: Global/USA/Nevada/Las Vegas
         fabric_roles:
           - EDGE_NODE
         port_assignments:
@@ -34,8 +27,8 @@ catalyst_center:
         pid: C9KV-UADP-8P
         state: INIT
         device_role: ACCESS
-        site: Global/Poland/Krakow/Bld A
-        fabric_site: Global/Poland/Krakow
+        site: Global/USA/Nevada/Las Vegas/Bld A
+        fabric_site: Global/USA/Nevada/Las Vegas
         fabric_roles:
           - EDGE_NODE
         port_assignments:
