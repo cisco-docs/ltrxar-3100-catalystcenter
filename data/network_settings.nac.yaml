@@ -1,4 +1,7 @@
 ---
+# IP pools for the two SDA fabrics. All three pools are reserved at the
+# Las Vegas city level (see sites.nac.yaml) so they're available to both
+# Bld A (Fabric A) and Bld B (Fabric B).
 catalyst_center:
   network_settings:
     aaa_servers:
@@ -12,7 +15,8 @@ catalyst_center:
         ip_address_space: IPv4
         ip_pool_cidr: 192.168.0.0/16
         ip_pools_reservations:
-          - name: CampusVN-IPPool
+          # ── Fabric A · Campus VN · Employees AGW (laptop) ──
+          - name: EmployeesPool
             prefix_length: 24
             subnet: 192.168.100.0
             gateway: 192.168.100.1
@@ -20,10 +24,20 @@ catalyst_center:
               - 198.18.130.11
             dhcp_servers:
               - 198.18.130.11
-          - name: GuestVN-IPPool
+          # ── Fabric A · Campus VN · Servers AGW (server) ──
+          - name: ServersPool
             prefix_length: 24
-            subnet: 192.168.101.0
-            gateway: 192.168.101.1
+            subnet: 192.168.110.0
+            gateway: 192.168.110.1
+            dns_servers:
+              - 198.18.130.11
+            dhcp_servers:
+              - 198.18.130.11
+          # ── Fabric B · IoT VN · Cameras AGW (camera) ──
+          - name: IoTPool
+            prefix_length: 24
+            subnet: 192.168.200.0
+            gateway: 192.168.200.1
             dns_servers:
               - 198.18.130.11
             dhcp_servers:

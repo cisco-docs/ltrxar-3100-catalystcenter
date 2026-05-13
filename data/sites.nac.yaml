@@ -1,4 +1,8 @@
 ---
+# Two fabric sites under one Catalyst Center (multi-fabric pattern):
+#   Bld A = SDA Fabric A (BORDER + SDA-EDGE-01 + SDA-EDGE-02)
+#   Bld B = SDA Fabric B (FIAB only — fabric-in-a-box, all 3 roles)
+# Both buildings share Las Vegas city (and its IP pool reservations + AAA).
 catalyst_center:
   sites:
     areas:
@@ -12,10 +16,16 @@ catalyst_center:
         network_settings:
           aaa_servers: AAA_Settings
         ip_pools_reservations:
-          - CampusVN-IPPool
-          - GuestVN-IPPool
+          - EmployeesPool
+          - ServersPool
+          - IoTPool
     buildings:
       - name: Bld A
+        latitude: 36.1699
+        longitude: -115.1398
+        country: United States
+        parent_name: Global/USA/Nevada/Las Vegas
+      - name: Bld B
         latitude: 36.1699
         longitude: -115.1398
         country: United States
@@ -27,3 +37,6 @@ catalyst_center:
       - name: FLOOR_2
         floor_number: 2
         parent_name: Global/USA/Nevada/Las Vegas/Bld A
+      - name: FLOOR_1
+        floor_number: 1
+        parent_name: Global/USA/Nevada/Las Vegas/Bld B
