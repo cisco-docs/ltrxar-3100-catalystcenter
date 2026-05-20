@@ -9,7 +9,7 @@ catalyst_center:
         client_and_endpoint_aaa:
           server_type: ISE
           protocol: RADIUS
-          primary_ip: 198.18.133.27
+          primary_ip: 198.18.133.30
     ip_pools:
       - name: Overlay
         ip_address_space: IPv4
