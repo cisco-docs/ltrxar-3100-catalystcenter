@@ -2,7 +2,9 @@
 # Two fabric sites under one Catalyst Center (multi-fabric pattern):
 #   Bld A = SDA Fabric A (BORDER + SDA-EDGE-01 + SDA-EDGE-02)
 #   Bld B = SDA Fabric B (FIAB only — fabric-in-a-box, all 3 roles)
-# Both buildings share Las Vegas city (and its IP pool reservations + AAA).
+# AAA + telemetry inherit from Las Vegas. IP pool reservations must be at
+# the fabric site (building) level — CC rejects AGW creation against pools
+# only reserved at parent area level.
 catalyst_center:
   sites:
     areas:
@@ -16,21 +18,22 @@ catalyst_center:
         network_settings:
           aaa_servers: AAA_Settings
           telemetry: FABRIC_TELEMETRY
-        ip_pools_reservations:
-          - EmployeesPool
-          - ServersPool
-          - IoTPool
     buildings:
       - name: Bld A
         latitude: 36.1699
         longitude: -115.1398
         country: United States
         parent_name: Global/USA/Nevada/Las Vegas
+        ip_pools_reservations:
+          - EmployeesPool
+          - ServersPool
       - name: Bld B
         latitude: 36.1699
         longitude: -115.1398
         country: United States
         parent_name: Global/USA/Nevada/Las Vegas
+        ip_pools_reservations:
+          - IoTPool
     floors:
       - name: FLOOR_1
         floor_number: 1
