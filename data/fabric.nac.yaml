@@ -1,58 +1,58 @@
----
-# Fabric topology for both SDA fabrics:
-#   Bld A = Fabric A: Campus VN with two anycast gateways (Employees, Servers)
-#   Bld B = Fabric B: IoT VN with one anycast gateway (Cameras)
-#
-# Each anycast gateway carries security_group_name (the default SG for hosts
-# in the pool) and group_based_policy_enforcement_enabled (the on-switch
-# enforcement toggle that downloads the ISE matrix). See design.md §6.
-#
-# Campus VN and IoT VN both terminate into SDWAN VPN30 at the L3 handoff
-# (handoffs owned by multi-domain/catc/). Cross-fabric L3 reachability is
-# therefore open; SGT alone provides segmentation between Cameras, Employees,
-# and Servers.
-#
-# fabric_transits + border_devices (BORDER + FIAB L3 handoffs) are owned
-# by multi-domain/catc/.
-catalyst_center:
-  fabric:
-    l3_virtual_networks:
-      - name: Campus
-      - name: IoT
+# ---
+# # Fabric topology for both SDA fabrics:
+# #   Bld A = Fabric A: Campus VN with two anycast gateways (Employees, Servers)
+# #   Bld B = Fabric B: IoT VN with one anycast gateway (Cameras)
+# #
+# # Each anycast gateway carries security_group_name (the default SG for hosts
+# # in the pool) and group_based_policy_enforcement_enabled (the on-switch
+# # enforcement toggle that downloads the ISE matrix). See design.md §6.
+# #
+# # Campus VN and IoT VN both terminate into SDWAN VPN30 at the L3 handoff
+# # (handoffs owned by multi-domain/catc/). Cross-fabric L3 reachability is
+# # therefore open; SGT alone provides segmentation between Cameras, Employees,
+# # and Servers.
+# #
+# # fabric_transits + border_devices (BORDER + FIAB L3 handoffs) are owned
+# # by multi-domain/catc/.
+# catalyst_center:
+#   fabric:
+#     l3_virtual_networks:
+#       - name: Campus
+#       - name: IoT
 
-    fabric_sites:
-      # ─────────────────────── Fabric A ───────────────────────
-      - name: Global/USA/Nevada/Las Vegas/Bld A
-        authentication_template:
-          name: No Authentication
-        pub_sub_enabled: true
-        l3_virtual_networks:
-          - Campus
-        anycast_gateways:
-          - ip_pool_name: EmployeesPool
-            vlan_name: VLAN_EMPLOYEES
-            traffic_type: DATA
-            l3_virtual_network: Campus
-            security_group_name: Employees
-            group_based_policy_enforcement_enabled: true
-          - ip_pool_name: ServersPool
-            vlan_name: VLAN_SERVERS
-            traffic_type: DATA
-            l3_virtual_network: Campus
-            security_group_name: Servers
-            group_based_policy_enforcement_enabled: true
+#     fabric_sites:
+#       # ─────────────────────── Fabric A ───────────────────────
+#       - name: Global/USA/Nevada/Las Vegas/Bld A
+#         authentication_template:
+#           name: No Authentication
+#         pub_sub_enabled: true
+#         l3_virtual_networks:
+#           - Campus
+#         anycast_gateways:
+#           - ip_pool_name: EmployeesPool
+#             vlan_name: VLAN_EMPLOYEES
+#             traffic_type: DATA
+#             l3_virtual_network: Campus
+#             security_group_name: Employees
+#             group_based_policy_enforcement_enabled: true
+#           - ip_pool_name: ServersPool
+#             vlan_name: VLAN_SERVERS
+#             traffic_type: DATA
+#             l3_virtual_network: Campus
+#             security_group_name: Servers
+#             group_based_policy_enforcement_enabled: true
 
-      # ─────────────────────── Fabric B ───────────────────────
-      - name: Global/USA/Nevada/Las Vegas/Bld B
-        authentication_template:
-          name: No Authentication
-        pub_sub_enabled: true
-        l3_virtual_networks:
-          - IoT
-        anycast_gateways:
-          - ip_pool_name: IoTPool
-            vlan_name: VLAN_CAMERAS
-            traffic_type: DATA
-            l3_virtual_network: IoT
-            security_group_name: Cameras
-            group_based_policy_enforcement_enabled: true
+#       # ─────────────────────── Fabric B ───────────────────────
+#       - name: Global/USA/Nevada/Las Vegas/Bld B
+#         authentication_template:
+#           name: No Authentication
+#         pub_sub_enabled: true
+#         l3_virtual_networks:
+#           - IoT
+#         anycast_gateways:
+#           - ip_pool_name: IoTPool
+#             vlan_name: VLAN_CAMERAS
+#             traffic_type: DATA
+#             l3_virtual_network: IoT
+#             security_group_name: Cameras
+#             group_based_policy_enforcement_enabled: true

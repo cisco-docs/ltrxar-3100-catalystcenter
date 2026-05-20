@@ -225,6 +225,15 @@ success:
 destroy:
   stage: destroy
   resource_group: catc
+  needs:
+    - job: validate
+      optional: true
+    - job: plan
+      optional: true
+    - job: deploy
+      optional: true
+    - job: test-integration
+      optional: true
   dependencies: []
   variables:
     TF_HTTP_PASSWORD: "${GITLAB_TOKEN}"

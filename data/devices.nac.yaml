@@ -1,61 +1,61 @@
----
-# Foundation device inventory for both SDA fabrics:
-#   Fabric A (Bld A): SDA-EDGE-01 (laptop), SDA-EDGE-02 (server)
-#   Fabric B (Bld B): SDA-FIAB (border + control plane + edge — single device)
-#
-# BORDER (Fabric A border + control plane) is owned by multi-domain/catc/.
-# SDA-FIAB lives here because it also holds the EDGE_NODE role (camera endpoint).
-catalyst_center:
-  inventory:
-    devices:
-      # ─────────────────────── Fabric A ───────────────────────
-      - name: SDA-EDGE-01
-        fqdn_name: SDA-EDGE-01.cisco.com
-        device_ip: 198.18.140.32
-        pid: C9KV-UADP-8P
-        state: INIT
-        device_role: ACCESS
-        site: Global/USA/Nevada/Las Vegas/Bld A
-        fabric_site: Global/USA/Nevada/Las Vegas/Bld A
-        fabric_roles:
-          - EDGE_NODE
-        port_assignments:
-          - interface_name: GigabitEthernet1/0/2
-            connected_device_type: USER_DEVICE
-            data_vlan_name: VLAN_EMPLOYEES
-            authenticate_template_name: "No Authentication"
+# ---
+# # Foundation device inventory for both SDA fabrics:
+# #   Fabric A (Bld A): SDA-EDGE-01 (laptop), SDA-EDGE-02 (server)
+# #   Fabric B (Bld B): SDA-FIAB (border + control plane + edge — single device)
+# #
+# # BORDER (Fabric A border + control plane) is owned by multi-domain/catc/.
+# # SDA-FIAB lives here because it also holds the EDGE_NODE role (camera endpoint).
+# catalyst_center:
+#   inventory:
+#     devices:
+#       # ─────────────────────── Fabric A ───────────────────────
+#       - name: SDA-EDGE-01
+#         fqdn_name: SDA-EDGE-01.cisco.com
+#         device_ip: 198.18.140.32
+#         pid: C9KV-UADP-8P
+#         state: INIT
+#         device_role: ACCESS
+#         site: Global/USA/Nevada/Las Vegas/Bld A
+#         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
+#         fabric_roles:
+#           - EDGE_NODE
+#         port_assignments:
+#           - interface_name: GigabitEthernet1/0/2
+#             connected_device_type: USER_DEVICE
+#             data_vlan_name: VLAN_EMPLOYEES
+#             authenticate_template_name: "No Authentication"
 
-      - name: SDA-EDGE-02
-        fqdn_name: SDA-EDGE-02.cisco.com
-        device_ip: 198.18.140.33
-        pid: C9KV-UADP-8P
-        state: INIT
-        device_role: ACCESS
-        site: Global/USA/Nevada/Las Vegas/Bld A
-        fabric_site: Global/USA/Nevada/Las Vegas/Bld A
-        fabric_roles:
-          - EDGE_NODE
-        port_assignments:
-          - interface_name: GigabitEthernet1/0/3
-            connected_device_type: USER_DEVICE
-            data_vlan_name: VLAN_SERVERS
-            authenticate_template_name: "No Authentication"
+#       - name: SDA-EDGE-02
+#         fqdn_name: SDA-EDGE-02.cisco.com
+#         device_ip: 198.18.140.33
+#         pid: C9KV-UADP-8P
+#         state: INIT
+#         device_role: ACCESS
+#         site: Global/USA/Nevada/Las Vegas/Bld A
+#         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
+#         fabric_roles:
+#           - EDGE_NODE
+#         port_assignments:
+#           - interface_name: GigabitEthernet1/0/3
+#             connected_device_type: USER_DEVICE
+#             data_vlan_name: VLAN_SERVERS
+#             authenticate_template_name: "No Authentication"
 
-      # ─────────────────────── Fabric B ───────────────────────
-      - name: SDA-FIAB
-        fqdn_name: SDA-FIAB.cisco.com
-        device_ip: 198.18.140.34
-        pid: C9KV-UADP-8P
-        state: INIT
-        device_role: BORDER ROUTER
-        site: Global/USA/Nevada/Las Vegas/Bld B
-        fabric_site: Global/USA/Nevada/Las Vegas/Bld B
-        fabric_roles:
-          - BORDER_NODE
-          - CONTROL_PLANE_NODE
-          - EDGE_NODE
-        port_assignments:
-          - interface_name: GigabitEthernet1/0/1
-            connected_device_type: USER_DEVICE
-            data_vlan_name: VLAN_CAMERAS
-            authenticate_template_name: "No Authentication"
+#       # ─────────────────────── Fabric B ───────────────────────
+#       - name: SDA-FIAB
+#         fqdn_name: SDA-FIAB.cisco.com
+#         device_ip: 198.18.140.34
+#         pid: C9KV-UADP-8P
+#         state: INIT
+#         device_role: BORDER ROUTER
+#         site: Global/USA/Nevada/Las Vegas/Bld B
+#         fabric_site: Global/USA/Nevada/Las Vegas/Bld B
+#         fabric_roles:
+#           - BORDER_NODE
+#           - CONTROL_PLANE_NODE
+#           - EDGE_NODE
+#         port_assignments:
+#           - interface_name: GigabitEthernet1/0/1
+#             connected_device_type: USER_DEVICE
+#             data_vlan_name: VLAN_CAMERAS
+#             authenticate_template_name: "No Authentication"
