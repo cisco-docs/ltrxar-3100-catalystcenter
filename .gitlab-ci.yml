@@ -39,13 +39,13 @@ variables:
     value: "${GITLAB_API_URL}/projects/${CI_PROJECT_ID}/terraform/state/tfstate"
   TF_HTTP_LOCK_ADDRESS:
     description: "GitLab HTTP Address to lock the TF state file"
-    value: ${TF_HTTP_ADDRESS}/lock
+    value: "${TF_HTTP_ADDRESS}/lock"
   TF_HTTP_LOCK_METHOD:
     description: "Method to lock TF state file"
     value: POST
   TF_HTTP_UNLOCK_ADDRESS:
     description: "GitLab HTTP Address to unlock the TF state file"
-    value: ${TF_HTTP_ADDRESS}/lock
+    value: "${TF_HTTP_ADDRESS}/lock"
   TF_HTTP_UNLOCK_METHOD:
     description: "Method to unlock TF state file"
     value: DELETE
