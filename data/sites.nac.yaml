@@ -15,6 +15,7 @@ catalyst_center:
         parent_name: Global/USA/Nevada
         network_settings:
           aaa_servers: AAA_Settings
+          telemetry: FABRIC_TELEMETRY
         ip_pools_reservations:
           - EmployeesPool
           - ServersPool

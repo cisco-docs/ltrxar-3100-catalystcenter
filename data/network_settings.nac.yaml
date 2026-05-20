@@ -42,3 +42,11 @@ catalyst_center:
               - 198.18.130.11
             dhcp_servers:
               - 198.18.130.11
+    telemetry:
+      - name: FABRIC_TELEMETRY
+        wired_data_collection: true
+        wireless_telemetry: false
+        enable_netflow_collector_on_devices: false
+        catalyst_center_as_network_collector: true
+        catalyst_center_as_snmp_server: true
+        catalyst_center_as_syslog_server: true
