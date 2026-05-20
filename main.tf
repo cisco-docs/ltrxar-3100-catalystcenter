@@ -5,6 +5,9 @@ terraform {
       version = "0.4.7"
     }
   }
+
+  backend "http" {
+  }
 }
 
 provider "catalystcenter" {
