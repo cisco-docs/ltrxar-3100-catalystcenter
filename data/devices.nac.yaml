@@ -1,17 +1,17 @@
 ---
 # Foundation device inventory for both SDA fabrics:
 #   Fabric A (Bld A): SDA-EDGE-01 (laptop), SDA-EDGE-02 (server)
-#   Fabric B (Bld B): FIAB (border + control plane + edge — single device)
+#   Fabric B (Bld B): SDA-FIAB (border + control plane + edge — single device)
 #
 # BORDER (Fabric A border + control plane) is owned by multi-domain/catc/.
-# FIAB lives here because it also holds the EDGE_NODE role (camera endpoint).
+# SDA-FIAB lives here because it also holds the EDGE_NODE role (camera endpoint).
 catalyst_center:
   inventory:
     devices:
       # ─────────────────────── Fabric A ───────────────────────
       - name: SDA-EDGE-01
-        fqdn_name: SDA-EDGE-01.cisco.eu
-        device_ip: 198.18.130.1
+        fqdn_name: SDA-EDGE-01.cisco.com
+        device_ip: 198.18.140.32
         pid: C9KV-UADP-8P
         state: INIT
         device_role: ACCESS
@@ -26,8 +26,8 @@ catalyst_center:
             authenticate_template_name: "No Authentication"
 
       - name: SDA-EDGE-02
-        fqdn_name: SDA-EDGE-02.cisco.eu
-        device_ip: 198.18.130.2
+        fqdn_name: SDA-EDGE-02.cisco.com
+        device_ip: 198.18.140.33
         pid: C9KV-UADP-8P
         state: INIT
         device_role: ACCESS
@@ -42,9 +42,9 @@ catalyst_center:
             authenticate_template_name: "No Authentication"
 
       # ─────────────────────── Fabric B ───────────────────────
-      - name: FIAB
-        fqdn_name: FIAB.cisco.eu
-        device_ip: 198.18.130.11
+      - name: SDA-FIAB
+        fqdn_name: SDA-FIAB.cisco.com
+        device_ip: 198.18.140.34
         pid: C9KV-UADP-8P
         state: INIT
         device_role: BORDER ROUTER
