@@ -154,7 +154,7 @@ deploy:
       when: manual
     - when: never
 
-test:
+test-integration:
   stage: test
   script:
     - set -o pipefail && nac-test -d ./data -d ./defaults -t ./templates/catalyst_center/test -o ./tests/results/catalyst_center |& tee test_output.txt
