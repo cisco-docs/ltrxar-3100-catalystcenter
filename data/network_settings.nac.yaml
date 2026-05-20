@@ -1,52 +1,52 @@
-# ---
-# # IP pools for the two SDA fabrics. All three pools are reserved at the
-# # Las Vegas city level (see sites.nac.yaml) so they're available to both
-# # Bld A (Fabric A) and Bld B (Fabric B).
-# catalyst_center:
-#   network_settings:
-#     aaa_servers:
-#       - name: AAA_Settings
-#         client_and_endpoint_aaa:
-#           server_type: ISE
-#           protocol: RADIUS
-#           primary_ip: 198.18.133.30
-#     ip_pools:
-#       - name: Overlay
-#         ip_address_space: IPv4
-#         ip_pool_cidr: 192.168.0.0/16
-#         ip_pools_reservations:
-#           # ── Fabric A · Campus VN · Employees AGW (laptop) ──
-#           - name: EmployeesPool
-#             prefix_length: 24
-#             subnet: 192.168.100.0
-#             gateway: 192.168.100.1
-#             dns_servers:
-#               - 198.18.130.11
-#             dhcp_servers:
-#               - 198.18.130.11
-#           # ── Fabric A · Campus VN · Servers AGW (server) ──
-#           - name: ServersPool
-#             prefix_length: 24
-#             subnet: 192.168.110.0
-#             gateway: 192.168.110.1
-#             dns_servers:
-#               - 198.18.130.11
-#             dhcp_servers:
-#               - 198.18.130.11
-#           # ── Fabric B · IoT VN · Cameras AGW (camera) ──
-#           - name: IoTPool
-#             prefix_length: 24
-#             subnet: 192.168.200.0
-#             gateway: 192.168.200.1
-#             dns_servers:
-#               - 198.18.130.11
-#             dhcp_servers:
-#               - 198.18.130.11
-#     telemetry:
-#       - name: FABRIC_TELEMETRY
-#         wired_data_collection: true
-#         wireless_telemetry: false
-#         enable_netflow_collector_on_devices: false
-#         catalyst_center_as_network_collector: true
-#         catalyst_center_as_snmp_server: true
-#         catalyst_center_as_syslog_server: true
+---
+# IP pools for the two SDA fabrics. All three pools are reserved at the
+# Las Vegas city level (see sites.nac.yaml) so they're available to both
+# Bld A (Fabric A) and Bld B (Fabric B).
+catalyst_center:
+  network_settings:
+    aaa_servers:
+      - name: AAA_Settings
+        client_and_endpoint_aaa:
+          server_type: ISE
+          protocol: RADIUS
+          primary_ip: 198.18.133.30
+    ip_pools:
+      - name: Overlay
+        ip_address_space: IPv4
+        ip_pool_cidr: 192.168.0.0/16
+        ip_pools_reservations:
+          # ── Fabric A · Campus VN · Employees AGW (laptop) ──
+          - name: EmployeesPool
+            prefix_length: 24
+            subnet: 192.168.100.0
+            gateway: 192.168.100.1
+            dns_servers:
+              - 198.18.130.11
+            dhcp_servers:
+              - 198.18.130.11
+          # ── Fabric A · Campus VN · Servers AGW (server) ──
+          - name: ServersPool
+            prefix_length: 24
+            subnet: 192.168.110.0
+            gateway: 192.168.110.1
+            dns_servers:
+              - 198.18.130.11
+            dhcp_servers:
+              - 198.18.130.11
+          # ── Fabric B · IoT VN · Cameras AGW (camera) ──
+          - name: IoTPool
+            prefix_length: 24
+            subnet: 192.168.200.0
+            gateway: 192.168.200.1
+            dns_servers:
+              - 198.18.130.11
+            dhcp_servers:
+              - 198.18.130.11
+    telemetry:
+      - name: FABRIC_TELEMETRY
+        wired_data_collection: true
+        wireless_telemetry: false
+        enable_netflow_collector_on_devices: false
+        catalyst_center_as_network_collector: true
+        catalyst_center_as_snmp_server: true
+        catalyst_center_as_syslog_server: true
