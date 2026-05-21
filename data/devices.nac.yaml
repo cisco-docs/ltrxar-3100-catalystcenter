@@ -18,6 +18,7 @@ catalyst_center:
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_roles:
+          - CONTROL_PLANE_NODE
           - EDGE_NODE
         port_assignments:
           - interface_name: GigabitEthernet1/0/2
