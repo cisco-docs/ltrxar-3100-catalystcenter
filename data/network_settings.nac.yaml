@@ -10,6 +10,7 @@ catalyst_center:
           server_type: ISE
           protocol: RADIUS
           primary_ip: 198.18.133.30
+          shared_secret: Cisco123!
     ip_pools:
       - name: Overlay
         ip_address_space: IPv4

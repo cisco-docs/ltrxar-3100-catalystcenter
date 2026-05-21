@@ -1,0 +1,34 @@
+---
+# CC template projects — declarative metadata for templates whose Jinja
+# content lives in catc/data/templates/*.j2.
+#
+# cts-bootstrap pushes the CTS-specific CLI that CC's standard provisioning
+# doesn't manage:
+#   - aaa authorization network CTS-AUTHZ-LIST group radius
+#   - cts authorization list CTS-AUTHZ-LIST
+#   - cts credentials id <device-name> password <secret>
+#
+# Devices reference this template (and pass per-device variables) in
+# multidomain/catc/data/devices.nac.yaml under each device's `dayn_templates`
+# block. Templates live in catc because the catc pipeline owns CC template
+# objects; devices live in multidomain because they have BORDER_NODE roles.
+catalyst_center:
+  templates:
+    projects:
+      - name: LtrxarMultidomain
+        description: LTRXAR-3100 multi-domain demo templates
+        dayn_templates:
+          - name: cts-bootstrap
+            language: JINJA
+            description: CTS authorization list + device credentials for SDA fabric devices (required for CTS PAC provisioning + SGACL download from ISE)
+            device_types:
+              - product_family: Switches and Hubs
+            variables:
+              - name: device_name
+                data_type: STRING
+                required: true
+                hint_text: Device hostname used as the CTS credential ID (must match the device's CC inventory name)
+              - name: cts_password
+                data_type: STRING
+                required: true
+                hint_text: CTS credential password — must match trust_sec.device_password in the corresponding ISE NAD entry
