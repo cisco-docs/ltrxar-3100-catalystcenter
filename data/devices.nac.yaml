@@ -13,7 +13,7 @@ catalyst_center:
         fqdn_name: SDA-EDGE-01.cisco.com
         device_ip: 198.18.140.32
         pid: C9KV-UADP-8P
-        state: PROVISION
+        state: INIT
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
@@ -29,7 +29,7 @@ catalyst_center:
         fqdn_name: SDA-EDGE-02.cisco.com
         device_ip: 198.18.140.33
         pid: C9KV-UADP-8P
-        state: PROVISION
+        state: INIT
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
