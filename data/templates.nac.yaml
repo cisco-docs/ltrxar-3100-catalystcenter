@@ -15,12 +15,14 @@
 catalyst_center:
   templates:
     projects:
-      - name: LtrxarMultidomain
+      - name: multidomain
         description: LTRXAR-3100 multi-domain demo templates
         dayn_templates:
           - name: cts-bootstrap
             language: JINJA
             description: CTS authorization list + device credentials for SDA fabric devices (required for CTS PAC provisioning + SGACL download from ISE)
+            software_type: IOS-XE
+            redeploy_template: ON_CHANGE
             device_types:
               - product_family: Switches and Hubs
             variables:
