@@ -16,7 +16,7 @@ catalyst_center:
         ip_address_space: IPv4
         ip_pool_cidr: 192.168.0.0/16
         ip_pools_reservations:
-          # ── Fabric A · Campus VN · Employees AGW (laptop) ──
+          # ── Fabric A · Campus VN · IT_Admin AGW (laptop) ──
           - name: EmployeesPool
             prefix_length: 24
             subnet: 192.168.100.0
