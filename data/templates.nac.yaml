@@ -16,7 +16,7 @@ catalyst_center:
   templates:
     projects:
       - name: multidomain
-        description: LTRXAR-3100 multi-domain demo template
+        description: LTRXAR-3100 multi-domain demo template for cts
         dayn_templates:
           - name: cts-bootstrap
             language: JINJA
