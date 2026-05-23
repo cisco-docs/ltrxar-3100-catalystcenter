@@ -10,13 +10,13 @@ catalyst_center:
           server_type: ISE
           protocol: RADIUS
           primary_ip: 198.18.133.30
-          shared_secret: Cisco123!
+          shared_secret: C1sco12345
     ip_pools:
       - name: Overlay
         ip_address_space: IPv4
         ip_pool_cidr: 192.168.0.0/16
         ip_pools_reservations:
-          # ── Fabric A · Campus VN · Employees AGW (laptop) ──
+          # ── Fabric A · Campus VN · IT_Admin AGW (laptop) ──
           - name: EmployeesPool
             prefix_length: 24
             subnet: 192.168.100.0

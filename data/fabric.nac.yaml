@@ -1,6 +1,6 @@
 ---
 # Fabric topology for both SDA fabrics:
-#   Bld A = Fabric A: Campus VN with two anycast gateways (Employees, Servers)
+#   Bld A = Fabric A: Campus VN with two anycast gateways (IT_Admin, Servers)
 #   Bld B = Fabric B: IoT VN with one anycast gateway (Cameras)
 #
 # Each anycast gateway carries security_group_name (the default SG for hosts
@@ -9,7 +9,7 @@
 #
 # Campus VN and IoT VN both terminate into SDWAN VPN30 at the L3 handoff
 # (handoffs owned by multi-domain/catc/). Cross-fabric L3 reachability is
-# therefore open; SGT alone provides segmentation between Cameras, Employees,
+# therefore open; SGT alone provides segmentation between Cameras, IT_Admin,
 # and Servers.
 #
 # fabric_transits + border_devices (BORDER + FIAB L3 handoffs) are owned
@@ -33,7 +33,7 @@ catalyst_center:
             vlan_name: VLAN_EMPLOYEES
             traffic_type: DATA
             l3_virtual_network: Campus
-            security_group_name: Employees
+            security_group_name: IT_Admin
             group_based_policy_enforcement_enabled: true
           - ip_pool_name: ServersPool
             vlan_name: VLAN_SERVERS
