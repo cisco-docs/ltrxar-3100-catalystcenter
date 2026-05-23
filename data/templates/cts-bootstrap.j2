@@ -9,15 +9,13 @@
 ! What this template adds:
 !   1. AAA method list named CTS-AUTHZ-LIST that uses the RADIUS group
 !   2. cts authorization list CTS-AUTHZ-LIST - tells CTS which AAA list to use
-!   3. cts credentials id/password - the CTS device identity (matches the
-!      trust_sec.device_id/device_password in the ISE NAD entry)
 !
-! After this template runs and CC pushes config, the device will:
-!   - PAC-provision against ISE on first CTS handshake
-!   - Download SGT name table, IP-SGT bindings, and SGACL matrix every 60s
-!   - Re-download on CoA-Reauth from ISE
+! NOTE: 'cts credentials id/password' is intentionally omitted here.
+! That command requires TrustSec to be initialized on the device first
+! (CTS PAC provisioning must complete via ISE before the command is valid).
+! Push it manually after the first successful CTS handshake:
+!   cts credentials id <device_name> password <cts_password>
 ! ---------------------------------------------------------------------
 
 aaa authorization network CTS-AUTHZ-LIST group radius
 cts authorization list CTS-AUTHZ-LIST
-cts credentials id {{ device_name }} password {{ cts_password }}
