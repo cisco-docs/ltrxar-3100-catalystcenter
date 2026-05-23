@@ -9,6 +9,7 @@ stages:
   - test
   - notify
   - destroy
+  - refresh
 
 variables:
   GIT_SSL_NO_VERIFY: "true"
@@ -252,7 +253,7 @@ destroy:
       allow_failure: true
 
 refresh:
-  stage: destroy
+  stage: refresh
   resource_group: catc
   needs: []
   dependencies: []
