@@ -19,7 +19,7 @@
 catalyst_center:
   network_profiles:
     switching:
-      - name: SDA-Fabric-Switches
+      - name: SDA-Fabric-Switches-Profile
         dayn_templates:
           - cts-bootstrap
         sites:
