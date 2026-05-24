@@ -8,6 +8,8 @@ Jenkinsfile
 pytest.ini
 templates/
 scripts/
+.github/
+.ci/
 
 
 ### dotenv ###

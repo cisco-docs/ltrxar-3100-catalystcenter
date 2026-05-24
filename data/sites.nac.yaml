@@ -15,25 +15,25 @@ catalyst_center:
         parent_name: Global/USA
       - name: Las Vegas
         parent_name: Global/USA/Nevada
-        # network_settings:
-        #   aaa_servers: AAA_Settings
-        #   telemetry: FABRIC_TELEMETRY
+        network_settings:
+          aaa_servers: AAA_Settings
+          telemetry: FABRIC_TELEMETRY
     buildings:
       - name: Bld A
         latitude: 36.1699
         longitude: -115.1398
         country: United States
         parent_name: Global/USA/Nevada/Las Vegas
-        # ip_pools_reservations:
-        #   - EmployeesPool
-        #   - ServersPool
+        ip_pools_reservations:
+          - EmployeesPool
+          - ServersPool
       - name: Bld B
         latitude: 36.1699
         longitude: -115.1398
         country: United States
         parent_name: Global/USA/Nevada/Las Vegas
-        # ip_pools_reservations:
-        #   - IoTPool
+        ip_pools_reservations:
+          - IoTPool
     floors:
       - name: FLOOR_1
         floor_number: 1
