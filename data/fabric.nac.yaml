@@ -20,6 +20,12 @@ catalyst_center:
       - name: Campus
       - name: IoT
 
+    transits:
+      - name: BGP-SDWAN
+        type: IP_BASED_TRANSIT
+        routing_protocol_name: BGP
+        autonomous_system_number: 65200
+
     fabric_sites:
       # ─────────────────────── Fabric A ───────────────────────
       - name: Global/USA/Nevada/Las Vegas/Bld A
@@ -56,3 +62,42 @@ catalyst_center:
             l3_virtual_network: IoT
             security_group_name: Cameras
             group_based_policy_enforcement_enabled: true
+
+    border_devices:
+      # ─────────────────────── Fabric A ───────────────────────
+      - name: BORDER.cisco.eu
+        border_types:
+          - LAYER_3
+        default_exit: true
+        import_external_routes: false
+        local_autonomous_system_number: 65001
+        l3_handoffs:
+          - name: BGP-SDWAN
+            interfaces:
+              - name: GigabitEthernet1/0/24
+                virtual_networks:
+                  - name: Campus
+                    vlan: 3010
+                    local_ip_address: 10.100.30.1/30
+                    peer_ip_address: 10.100.30.2/30
+                    tcp_mss_adjustment: 1350
+
+      # ─────────────────────── Fabric B ───────────────────────
+      - name: FIAB.cisco.eu
+        border_types:
+          - LAYER_3
+        default_exit: true
+        import_external_routes: false
+        local_autonomous_system_number: 65002
+        l3_handoffs:
+          - name: BGP-SDWAN
+            interfaces:
+              - name: GigabitEthernet1/0/24
+                virtual_networks:
+                  - name: IoT
+                    vlan: 3050
+                    local_ip_address: 10.100.50.1/30
+                    peer_ip_address: 10.100.50.2/30
+                    tcp_mss_adjustment: 1350
+
+
