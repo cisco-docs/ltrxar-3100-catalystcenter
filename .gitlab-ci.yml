@@ -276,3 +276,30 @@ refresh:
       when: manual
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: manual
+
+state-cleanup:
+  stage: refresh
+  resource_group: catc
+  needs: []
+  dependencies: []
+  when: manual
+  allow_failure: true
+  script:
+    - terraform init -input=false
+    - terraform state rm 'module.catalyst_center.catalystcenter_fabric_l3_handoff_ip_transits.l3_handoff_ip_transits["SDA-BORDER"]' || true
+    - terraform state rm 'module.catalyst_center.catalystcenter_fabric_l3_handoff_ip_transits.l3_handoff_ip_transits["SDA-FIAB"]' || true
+    - terraform state rm 'module.catalyst_center.catalystcenter_fabric_devices.fabric_devices["Global/USA/Nevada/Las Vegas/Bld A"]' || true
+    - terraform state rm 'module.catalyst_center.catalystcenter_fabric_devices.fabric_devices["Global/USA/Nevada/Las Vegas/Bld B"]' || true
+    - terraform state rm 'module.catalyst_center.catalystcenter_provision_devices.provision_devices["Global/USA/Nevada/Las Vegas/Bld A"]' || true
+    - terraform state rm 'module.catalyst_center.catalystcenter_provision_devices.provision_devices["Global/USA/Nevada/Las Vegas/Bld B"]' || true
+  rules:
+    - if: '$CI_COMMIT_TAG'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: manual
+    - if: '$CI_COMMIT_BRANCH =~ /^devhub\//'
+      when: manual
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      when: manual
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: manual
