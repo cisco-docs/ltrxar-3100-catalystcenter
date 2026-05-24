@@ -7,7 +7,6 @@ docs/
 Jenkinsfile
 pytest.ini
 templates/
-scripts/
 .github/
 
 
