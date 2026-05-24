@@ -6,8 +6,8 @@ docs/
 .gitignore
 Jenkinsfile
 pytest.ini
-templates/
 .github/
+scripts/
 
 
 
