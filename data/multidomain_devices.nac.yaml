@@ -1,44 +1,47 @@
-# ============================================================================
-# MULTIDOMAIN OVERLAY — SDA fabric device inventory
-#
-# This file is COMMENTED OUT by default. The catc standalone deploy ignores
-# this file at Phase 1. It activates in Phase 2 as part of the multidomain
-# rollout (paired with data/multidomain_fabric.nac.yaml).
-#
-# Phase plan:
-#   Phase 1: file body fully commented. Catc deploys foundation only (sites,
-#            network_settings, templates library, IP pools).
-#   Phase 2: uncomment the entire YAML body below (select block in editor +
-#            Cmd/Ctrl+/ in VS Code, or `sed -i 's/^# //' <file>` carefully).
-#            Devices land in CC with state: INIT — terraform asserts they
-#            exist in inventory but does NOT push provisioning config.
-#            fabric_roles becomes active immediately.
-#            NOTE: with state: INIT, the module may or may not skip the
-#            catalystcenter_fabric_devices resource. If terraform plan shows
-#            fabric_devices.create with un-provisioned devices, expect the
-#            apply to fail with "Could not find device" — fall back to
-#            inline-commenting fabric_roles until Phase 3.
-#   Phase 3: flip every `state: INIT` to `state: PROVISION`. Devices get
-#            baseline config push + fabric membership + L3 handoffs (the
-#            border_devices block in multidomain_fabric.nac.yaml). BGP comes
-#            up end-to-end with SDWAN cEdges.
-#   Phase 4: uncomment per-device `port_assignments:` and `dayn_templates:`.
-#            Then manually push `cts credentials id <name> password <pw>` per
-#            device after CTS PAC provisioning completes (see header of
-#            data/templates/cts-bootstrap.j2).
-#
-# Fabric A:
-#   BORDER.cisco.eu     BORDER + CP   (handles L3 egress + LISP map server)
-#   EDGE01.cisco.eu     EDGE          (Gi1/0/1 → laptop, VLAN_EMPLOYEES)
-#   EDGE02.cisco.eu     EDGE          (Gi1/0/1 → server, VLAN_SERVERS)
-#
-# Fabric B:
-#   FIAB.cisco.eu       BORDER + CP + EDGE  (FIAB, Gi1/0/1 → camera, VLAN_CAMERAS)
-#
-# Why CP must be co-located with BORDER (not EDGE): CC requires
-# CONTROL_PLANE_NODE in the fabric before any EDGE_NODE can be added, AND
-# CP+EDGE alone is rejected. So BORDER.cisco.eu owns CP for Fabric A.
-# ============================================================================
+# # ============================================================================
+# # MULTIDOMAIN OVERLAY — SDA fabric device inventory
+# #
+# # This file is COMMENTED OUT by default. The catc standalone deploy ignores
+# # this file at Phase 1. It activates in Phase 2 as part of the multidomain
+# # rollout (paired with data/multidomain_fabric.nac.yaml).
+# #
+# # Phase plan:
+# #   Phase 1: file body fully commented. Catc deploys foundation only (sites,
+# #            network_settings, templates library, IP pools).
+# #   Phase 2: uncomment the entire YAML body below. Run from a shell:
+# #              sed -i 's/^# //' data/multidomain_devices.nac.yaml
+# #            Safe to run on the full file — this header is double-commented
+# #            (`# #`) so one layer survives sed and the header stays a comment.
+# #            Alternatively in VS Code: select the YAML body block, Cmd/Ctrl+/.
+# #            Devices land in CC with state: INIT — terraform asserts they
+# #            exist in inventory but does NOT push provisioning config.
+# #            fabric_roles becomes active immediately.
+# #            NOTE: with state: INIT, the module may or may not skip the
+# #            catalystcenter_fabric_devices resource. If terraform plan shows
+# #            fabric_devices.create with un-provisioned devices, expect the
+# #            apply to fail with "Could not find device" — fall back to
+# #            inline-commenting fabric_roles until Phase 3.
+# #   Phase 3: flip every `state: INIT` to `state: PROVISION`. Devices get
+# #            baseline config push + fabric membership + L3 handoffs (the
+# #            border_devices block in multidomain_fabric.nac.yaml). BGP comes
+# #            up end-to-end with SDWAN cEdges.
+# #   Phase 4: uncomment per-device `port_assignments:` and `dayn_templates:`.
+# #            Then manually push `cts credentials id <name> password <pw>` per
+# #            device after CTS PAC provisioning completes (see header of
+# #            data/templates/cts-bootstrap.j2).
+# #
+# # Fabric A:
+# #   BORDER.cisco.eu     BORDER + CP   (handles L3 egress + LISP map server)
+# #   EDGE01.cisco.eu     EDGE          (Gi1/0/1 → laptop, VLAN_EMPLOYEES)
+# #   EDGE02.cisco.eu     EDGE          (Gi1/0/1 → server, VLAN_SERVERS)
+# #
+# # Fabric B:
+# #   FIAB.cisco.eu       BORDER + CP + EDGE  (FIAB, Gi1/0/1 → camera, VLAN_CAMERAS)
+# #
+# # Why CP must be co-located with BORDER (not EDGE): CC requires
+# # CONTROL_PLANE_NODE in the fabric before any EDGE_NODE can be added, AND
+# # CP+EDGE alone is rejected. So BORDER.cisco.eu owns CP for Fabric A.
+# # ============================================================================
 
 # ---
 # catalyst_center:
@@ -65,7 +68,7 @@
 #         #           value: BORDER.cisco.eu
 #         #         - name: cts_password
 #         #           value: C1sco12345
-#
+
 #       - name: EDGE01.cisco.eu
 #         fqdn_name: EDGE01.cisco.eu
 #         device_ip: 198.18.140.32
@@ -90,7 +93,7 @@
 #         #           value: EDGE01.cisco.eu
 #         #         - name: cts_password
 #         #           value: C1sco12345
-#
+
 #       - name: EDGE02.cisco.eu
 #         fqdn_name: EDGE02.cisco.eu
 #         device_ip: 198.18.140.33
@@ -115,7 +118,7 @@
 #         #           value: EDGE02.cisco.eu
 #         #         - name: cts_password
 #         #           value: C1sco12345
-#
+
 #       # ─────────────────────── Fabric B ───────────────────────
 #       - name: FIAB.cisco.eu
 #         fqdn_name: FIAB.cisco.eu

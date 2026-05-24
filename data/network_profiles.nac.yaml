@@ -1,0 +1,27 @@
+---
+# Network profile binding for the cts-bootstrap day-N template.
+#
+# Why this lives in Phase 1 (not behind a multidomain_ prefix):
+#   Network profiles are pure site-level intent — they bind a template to a
+#   site BEFORE any device joins. CC stores the binding; when devices later
+#   join Bld A / Bld B (Phase 2 INIT) and provision (Phase 3 PROVISION), the
+#   template is pushed automatically. Shipping the profile in Phase 1 means
+#   Phase 3 PROVISION pushes CTS bootstrap CLI in the same workflow, with no
+#   extra step. Matches the netascode/nac-catalystcenter-comprehensive-example
+#   lab pattern (network_profiles applied alongside templates/IP pools, before
+#   any device exists).
+#
+# This profile attaches cts-bootstrap to all switches in the two fabric
+# buildings. Per-device variables (device_name, cts_password) are passed via
+# inline `dayn_templates:` blocks on each device in multidomain_devices.nac.yaml
+# (Phase 4) — the profile alone pushes the template without variables; the
+# inline block is what supplies the per-device values.
+catalyst_center:
+  network_profiles:
+    switching:
+      - name: SDA-Fabric-Switches
+        dayn_templates:
+          - cts-bootstrap
+        sites:
+          - Global/USA/Nevada/Las Vegas/Bld A
+          - Global/USA/Nevada/Las Vegas/Bld B
