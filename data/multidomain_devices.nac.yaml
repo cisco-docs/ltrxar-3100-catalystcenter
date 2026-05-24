@@ -32,7 +32,7 @@ catalyst_center:
   inventory:
     devices:
       # ─────────────────────── Fabric A ───────────────────────
-      - name: SDA-BORDER
+      - name: BORDER
         fqdn_name: BORDER.cisco.eu
         device_ip: 198.18.140.31
         pid: C9KV-Q200-8P
@@ -52,7 +52,7 @@ catalyst_center:
         #         - name: cts_password
         #           value: C1sco12345
 
-      - name: SDA-EDGE-01
+      - name: EDGE01
         fqdn_name: EDGE01.cisco.eu
         device_ip: 198.18.140.32
         pid: C9KV-Q200-8P
@@ -76,7 +76,7 @@ catalyst_center:
         #         - name: cts_password
         #           value: C1sco12345
 
-      - name: SDA-EDGE-02
+      - name: EDGE02
         fqdn_name: EDGE02.cisco.eu
         device_ip: 198.18.140.33
         pid: C9KV-Q200-8P
@@ -101,7 +101,7 @@ catalyst_center:
         #           value: C1sco12345
 
       # ─────────────────────── Fabric B ───────────────────────
-      - name: SDA-FIAB
+      - name: FIAB
         fqdn_name: FIAB.cisco.eu
         device_ip: 198.18.140.34
         pid: C9KV-Q200-8P
