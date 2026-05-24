@@ -24,16 +24,16 @@ catalyst_center:
         longitude: -115.1398
         country: United States
         parent_name: Global/USA/Nevada/Las Vegas
-        ip_pools_reservations:
-          - EmployeesPool
-          - ServersPool
+        # ip_pools_reservations:
+        #   - EmployeesPool
+        #   - ServersPool
       - name: Bld B
         latitude: 36.1699
         longitude: -115.1398
         country: United States
         parent_name: Global/USA/Nevada/Las Vegas
-        ip_pools_reservations:
-          - IoTPool
+        # ip_pools_reservations:
+        #   - IoTPool
     floors:
       - name: FLOOR_1
         floor_number: 1
