@@ -36,69 +36,69 @@ catalyst_center:
         fqdn_name: SDA-BORDER.cisco.com
         device_ip: 198.18.140.31
         pid: C9KV-UADP-8P
-        state: INIT
+        state: PROVISION
         device_role: BORDER ROUTER
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_roles:
           - BORDER_NODE
           - CONTROL_PLANE_NODE
-        dayn_templates:
-          regular:
-            - name: cts-bootstrap
-              variables:
-                - name: device_name
-                  value: SDA-BORDER
-                - name: cts_password
-                  value: C1sco12345
+        # dayn_templates:
+        #   regular:
+        #     - name: cts-bootstrap
+        #       variables:
+        #         - name: device_name
+        #           value: SDA-BORDER
+        #         - name: cts_password
+        #           value: C1sco12345
 
       - name: SDA-EDGE-01
         fqdn_name: SDA-EDGE-01.cisco.com
         device_ip: 198.18.140.32
         pid: C9KV-UADP-8P
-        state: INIT
+        state: PROVISION
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_roles:
           - EDGE_NODE
-        port_assignments:
-          - interface_name: GigabitEthernet1/0/1
-            connected_device_type: USER_DEVICE
-            data_vlan_name: VLAN_EMPLOYEES
-            authenticate_template_name: "No Authentication"
-        dayn_templates:
-          regular:
-            - name: cts-bootstrap
-              variables:
-                - name: device_name
-                  value: SDA-EDGE-01
-                - name: cts_password
-                  value: C1sco12345
+        # port_assignments:
+        #   - interface_name: GigabitEthernet1/0/1
+        #     connected_device_type: USER_DEVICE
+        #     data_vlan_name: VLAN_EMPLOYEES
+        #     authenticate_template_name: "No Authentication"
+        # dayn_templates:
+        #   regular:
+        #     - name: cts-bootstrap
+        #       variables:
+        #         - name: device_name
+        #           value: SDA-EDGE-01
+        #         - name: cts_password
+        #           value: C1sco12345
 
       - name: SDA-EDGE-02
         fqdn_name: SDA-EDGE-02.cisco.com
         device_ip: 198.18.140.33
         pid: C9KV-UADP-8P
-        state: INIT
+        state: PROVISION
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_roles:
           - EDGE_NODE
-        port_assignments:
-          - interface_name: GigabitEthernet1/0/1
-            connected_device_type: USER_DEVICE
-            data_vlan_name: VLAN_SERVERS
-            authenticate_template_name: "No Authentication"
-        dayn_templates:
-          regular:
-            - name: cts-bootstrap
-              variables:
-                - name: device_name
-                  value: SDA-EDGE-02
-                - name: cts_password
-                  value: C1sco12345
+        # port_assignments:
+        #   - interface_name: GigabitEthernet1/0/1
+        #     connected_device_type: USER_DEVICE
+        #     data_vlan_name: VLAN_SERVERS
+        #     authenticate_template_name: "No Authentication"
+        # dayn_templates:
+        #   regular:
+        #     - name: cts-bootstrap
+        #       variables:
+        #         - name: device_name
+        #           value: SDA-EDGE-02
+        #         - name: cts_password
+        #           value: C1sco12345
 
       # ─────────────────────── Fabric B ───────────────────────
       - name: SDA-FIAB
@@ -113,16 +113,16 @@ catalyst_center:
           - BORDER_NODE
           - CONTROL_PLANE_NODE
           - EDGE_NODE
-        port_assignments:
-          - interface_name: GigabitEthernet1/0/1
-            connected_device_type: USER_DEVICE
-            data_vlan_name: VLAN_CAMERAS
-            authenticate_template_name: "No Authentication"
-        dayn_templates:
-          regular:
-            - name: cts-bootstrap
-              variables:
-                - name: device_name
-                  value: SDA-FIAB
-                - name: cts_password
-                  value: C1sco12345
+        # port_assignments:
+        #   - interface_name: GigabitEthernet1/0/1
+        #     connected_device_type: USER_DEVICE
+        #     data_vlan_name: VLAN_CAMERAS
+        #     authenticate_template_name: "No Authentication"
+        # dayn_templates:
+        #   regular:
+        #     - name: cts-bootstrap
+        #       variables:
+        #         - name: device_name
+        #           value: SDA-FIAB
+        #         - name: cts_password
+        #           value: C1sco12345
