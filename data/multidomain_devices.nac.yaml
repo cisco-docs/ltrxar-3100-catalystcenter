@@ -52,7 +52,7 @@ catalyst_center:
         fqdn_name: BORDER.cisco.eu
         device_ip: 198.18.140.31
         pid: C9KV-UADP-8P
-        state: INIT  # Phase 3: flip to PROVISION
+        state: PROVISION  # Phase 3: flip to PROVISION
         device_role: BORDER ROUTER
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
@@ -73,7 +73,7 @@ catalyst_center:
         fqdn_name: EDGE01.cisco.eu
         device_ip: 198.18.140.32
         pid: C9KV-UADP-8P
-        state: INIT  # Phase 3: flip to PROVISION
+        state: PROVISION  # Phase 3: flip to PROVISION
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
@@ -98,7 +98,7 @@ catalyst_center:
         fqdn_name: EDGE02.cisco.eu
         device_ip: 198.18.140.33
         pid: C9KV-UADP-8P
-        state: INIT  # Phase 3: flip to PROVISION
+        state: PROVISION  # Phase 3: flip to PROVISION
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
@@ -124,7 +124,7 @@ catalyst_center:
         fqdn_name: FIAB.cisco.eu
         device_ip: 198.18.140.34
         pid: C9KV-UADP-8P
-        state: INIT  # Phase 3: flip to PROVISION
+        state: PROVISION  # Phase 3: flip to PROVISION
         device_role: BORDER ROUTER
         site: Global/USA/Nevada/Las Vegas/Bld B
         fabric_site: Global/USA/Nevada/Las Vegas/Bld B
