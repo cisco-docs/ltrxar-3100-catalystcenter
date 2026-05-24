@@ -36,7 +36,7 @@ catalyst_center:
         fqdn_name: BORDER.cisco.eu
         device_ip: 198.18.140.31
         pid: C9KV-Q200-8P
-        state: PROVISION
+        state: INIT
         device_role: BORDER ROUTER
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
@@ -56,17 +56,17 @@ catalyst_center:
         fqdn_name: EDGE01.cisco.eu
         device_ip: 198.18.140.32
         pid: C9KV-Q200-8P
-        state: PROVISION
+        state: INIT
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_roles:
           - EDGE_NODE
-        # port_assignments:
-        #   - interface_name: GigabitEthernet1/0/1
-        #     connected_device_type: USER_DEVICE
-        #     data_vlan_name: VLAN_EMPLOYEES
-        #     authenticate_template_name: "No Authentication"
+        port_assignments:
+          - interface_name: GigabitEthernet1/0/1
+            connected_device_type: USER_DEVICE
+            data_vlan_name: VLAN_EMPLOYEES
+            authenticate_template_name: "No Authentication"
         # dayn_templates:
         #   regular:
         #     - name: cts-bootstrap
@@ -80,17 +80,17 @@ catalyst_center:
         fqdn_name: EDGE02.cisco.eu
         device_ip: 198.18.140.33
         pid: C9KV-Q200-8P
-        state: PROVISION
+        state: INIT
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_roles:
           - EDGE_NODE
-        # port_assignments:
-        #   - interface_name: GigabitEthernet1/0/1
-        #     connected_device_type: USER_DEVICE
-        #     data_vlan_name: VLAN_SERVERS
-        #     authenticate_template_name: "No Authentication"
+        port_assignments:
+          - interface_name: GigabitEthernet1/0/1
+            connected_device_type: USER_DEVICE
+            data_vlan_name: VLAN_SERVERS
+            authenticate_template_name: "No Authentication"
         # dayn_templates:
         #   regular:
         #     - name: cts-bootstrap
@@ -105,7 +105,7 @@ catalyst_center:
         fqdn_name: FIAB.cisco.eu
         device_ip: 198.18.140.34
         pid: C9KV-Q200-8P
-        state: PROVISION
+        state: INIT
         device_role: BORDER ROUTER
         site: Global/USA/Nevada/Las Vegas/Bld B
         fabric_site: Global/USA/Nevada/Las Vegas/Bld B
@@ -113,11 +113,11 @@ catalyst_center:
           - BORDER_NODE
           - CONTROL_PLANE_NODE
           - EDGE_NODE
-        # port_assignments:
-        #   - interface_name: GigabitEthernet1/0/1
-        #     connected_device_type: USER_DEVICE
-        #     data_vlan_name: VLAN_CAMERAS
-        #     authenticate_template_name: "No Authentication"
+        port_assignments:
+          - interface_name: GigabitEthernet1/0/1
+            connected_device_type: USER_DEVICE
+            data_vlan_name: VLAN_CAMERAS
+            authenticate_template_name: "No Authentication"
         # dayn_templates:
         #   regular:
         #     - name: cts-bootstrap
