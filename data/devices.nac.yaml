@@ -55,7 +55,7 @@ catalyst_center:
       - name: EDGE01.cisco.eu
         fqdn_name: EDGE01.cisco.eu
         device_ip: 198.18.140.32
-        pid: C9KV-Q200-8P
+        pid: C9KV-UDAP-8P
         state: PROVISION
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
