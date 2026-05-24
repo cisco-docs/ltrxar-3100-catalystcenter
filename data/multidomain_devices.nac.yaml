@@ -55,7 +55,7 @@ catalyst_center:
       - name: SDA-EDGE-01
         fqdn_name: EDGE01.cisco.eu
         device_ip: 198.18.140.32
-        # pid: C9KV-Q200-8P
+        pid: C9KV-Q200-8P
         state: PROVISION
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
@@ -79,7 +79,7 @@ catalyst_center:
       - name: SDA-EDGE-02
         fqdn_name: EDGE02.cisco.eu
         device_ip: 198.18.140.33
-        # pid: C9KV-Q200-8P
+        pid: C9KV-Q200-8P
         state: PROVISION
         device_role: ACCESS
         site: Global/USA/Nevada/Las Vegas/Bld A
@@ -104,7 +104,7 @@ catalyst_center:
       - name: SDA-FIAB
         fqdn_name: FIAB.cisco.eu
         device_ip: 198.18.140.34
-        # pid: C9KV-Q200-8P
+        pid: C9KV-Q200-8P
         state: PROVISION
         device_role: BORDER ROUTER
         site: Global/USA/Nevada/Las Vegas/Bld B
