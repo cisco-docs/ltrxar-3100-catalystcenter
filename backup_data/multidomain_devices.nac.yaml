@@ -43,14 +43,14 @@ catalyst_center:
         fabric_roles:
           - BORDER_NODE
           - CONTROL_PLANE_NODE
-        dayn_templates:
-          regular:
-            - name: cts-bootstrap
-              variables:
-                - name: device_name
-                  value: SDA-BORDER
-                - name: cts_password
-                  value: C1sco12345
+        # dayn_templates:
+        #   regular:
+        #     - name: cts-bootstrap
+        #       variables:
+        #         - name: device_name
+        #           value: SDA-BORDER
+        #         - name: cts_password
+        #           value: C1sco12345
 
       - name: SDA-EDGE-01
         fqdn_name: EDGE01.cisco.eu
