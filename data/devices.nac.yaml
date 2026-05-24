@@ -62,11 +62,11 @@ catalyst_center:
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_roles:
           - EDGE_NODE
-        port_assignments:
-          - interface_name: GigabitEthernet1/0/1
-            connected_device_type: USER_DEVICE
-            data_vlan_name: VLAN_EMPLOYEES
-            authenticate_template_name: "No Authentication"
+        # port_assignments:
+        #   - interface_name: GigabitEthernet1/0/1
+        #     connected_device_type: USER_DEVICE
+        #     data_vlan_name: VLAN_EMPLOYEES
+        #     authenticate_template_name: "No Authentication"
         # dayn_templates:
         #   regular:
         #     - name: cts-bootstrap
@@ -86,11 +86,11 @@ catalyst_center:
         fabric_site: Global/USA/Nevada/Las Vegas/Bld A
         fabric_roles:
           - EDGE_NODE
-        port_assignments:
-          - interface_name: GigabitEthernet1/0/1
-            connected_device_type: USER_DEVICE
-            data_vlan_name: VLAN_SERVERS
-            authenticate_template_name: "No Authentication"
+        # port_assignments:
+        #   - interface_name: GigabitEthernet1/0/1
+        #     connected_device_type: USER_DEVICE
+        #     data_vlan_name: VLAN_SERVERS
+        #     authenticate_template_name: "No Authentication"
         # dayn_templates:
         #   regular:
         #     - name: cts-bootstrap
@@ -113,11 +113,11 @@ catalyst_center:
           - BORDER_NODE
           - CONTROL_PLANE_NODE
           - EDGE_NODE
-        port_assignments:
-          - interface_name: GigabitEthernet1/0/1
-            connected_device_type: USER_DEVICE
-            data_vlan_name: VLAN_CAMERAS
-            authenticate_template_name: "No Authentication"
+        # port_assignments:
+        #   - interface_name: GigabitEthernet1/0/1
+        #     connected_device_type: USER_DEVICE
+        #     data_vlan_name: VLAN_CAMERAS
+        #     authenticate_template_name: "No Authentication"
         # dayn_templates:
         #   regular:
         #     - name: cts-bootstrap
