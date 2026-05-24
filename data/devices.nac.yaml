@@ -33,7 +33,7 @@ catalyst_center:
     devices:
       # ─────────────────────── Fabric A ───────────────────────
       - name: BORDER
-        fqdn_name: BORDER.cisco.eu
+        # fqdn_name: BORDER.cisco.eu
         device_ip: 198.18.140.31
         pid: C9KV-Q200-8P
         state: PROVISION
@@ -53,7 +53,7 @@ catalyst_center:
         #           value: C1sco12345
 
       - name: EDGE01
-        fqdn_name: EDGE01.cisco.eu
+        # fqdn_name: EDGE01.cisco.eu
         device_ip: 198.18.140.32
         pid: C9KV-Q200-8P
         state: PROVISION
@@ -77,7 +77,7 @@ catalyst_center:
         #           value: C1sco12345
 
       - name: EDGE02
-        fqdn_name: EDGE02.cisco.eu
+        # fqdn_name: EDGE02.cisco.eu
         device_ip: 198.18.140.33
         pid: C9KV-Q200-8P
         state: PROVISION
@@ -102,7 +102,7 @@ catalyst_center:
 
       # ─────────────────────── Fabric B ───────────────────────
       - name: FIAB
-        fqdn_name: FIAB.cisco.eu
+        # fqdn_name: FIAB.cisco.eu
         device_ip: 198.18.140.34
         pid: C9KV-Q200-8P
         state: PROVISION
