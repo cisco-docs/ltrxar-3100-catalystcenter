@@ -27,7 +27,7 @@ variables:
     value: "gitlab-ci-token"
   TF_HTTP_PASSWORD:
     description: "GitLab Access Token"
-    value: "${GITLAB_TOKEN}"
+    value: "${CI_JOB_TOKEN}"
   WEBEX_ROOM_ID:
     description: "Cisco Webex Room ID"
   WEBEX_TOKEN:
