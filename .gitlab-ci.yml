@@ -1,7 +1,7 @@
 ---
 image:
   name: danischm/nac:latest
-  pull_policy: always
+  pull_policy: if-not-present
 stages:
   - validate
   - plan
