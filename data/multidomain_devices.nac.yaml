@@ -33,7 +33,7 @@ catalyst_center:
     devices:
       # ─────────────────────── Fabric A ───────────────────────
       - name: SDA-BORDER
-        fqdn_name: SDA-BORDER.cisco.com
+        fqdn_name: BORDER.cisco.eu
         device_ip: 198.18.140.31
         pid: C9KV-UADP-8P
         state: PROVISION
@@ -53,7 +53,7 @@ catalyst_center:
         #           value: C1sco12345
 
       - name: SDA-EDGE-01
-        fqdn_name: SDA-EDGE-01.cisco.com
+        fqdn_name: EDGE01.cisco.eu
         device_ip: 198.18.140.32
         pid: C9KV-UADP-8P
         state: PROVISION
@@ -77,7 +77,7 @@ catalyst_center:
         #           value: C1sco12345
 
       - name: SDA-EDGE-02
-        fqdn_name: SDA-EDGE-02.cisco.com
+        fqdn_name: EDGE02.cisco.eu
         device_ip: 198.18.140.33
         pid: C9KV-UADP-8P
         state: PROVISION
@@ -102,7 +102,7 @@ catalyst_center:
 
       # ─────────────────────── Fabric B ───────────────────────
       - name: SDA-FIAB
-        fqdn_name: SDA-FIAB.cisco.com
+        fqdn_name: FIAB.cisco.eu
         device_ip: 198.18.140.34
         pid: C9KV-UADP-8P
         state: PROVISION
