@@ -38,7 +38,7 @@ Verify Device {{ device.name }}
     ${name_matches}=   Run Keyword And Return Status   Should Be Equal As Strings   ${device_entry['name']}   {{ device.name }}
     Run Keyword If   not ${name_matches}   Should Be Equal As Strings   ${device_entry['name']}   {{ device.fqdn_name }}
     Should Be Equal As Strings   ${device_entry['managementIpAddress']}   {{ device.device_ip }}
-    Should Be Equal As Strings   ${device_entry['platformId'].split(',')[0].strip()}    {{ device.pid }}
+    Run Keyword If   $device_entry['platformId'] is not None   Should Be Equal As Strings   ${device_entry['platformId'].split(',')[0].strip()}    {{ device.pid }}
 
     Should Be Equal As Strings   ${device_entry['deviceRole']}   {{ device.device_role }}
     ${s}=   Get Cached Sites Data

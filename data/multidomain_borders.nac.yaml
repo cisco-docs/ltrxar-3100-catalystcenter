@@ -26,7 +26,7 @@ catalyst_center:
   fabric:
     border_devices:
       # ─────────────────────── Fabric A ───────────────────────
-      - name: SDA-BORDER
+      - name: BORDER.cisco.eu
         border_types:
           - LAYER_3
         default_exit: true
@@ -44,7 +44,7 @@ catalyst_center:
                     tcp_mss_adjustment: 1350
 
       # ─────────────────────── Fabric B ───────────────────────
-      - name: SDA-FIAB
+      - name: FIAB.cisco.eu
         border_types:
           - LAYER_3
         default_exit: true
