@@ -60,14 +60,14 @@ catalyst_center:
           - BORDER_NODE
           - CONTROL_PLANE_NODE
         # Phase 4: uncomment to push CTS bootstrap template
-        # dayn_templates:
-        #   regular:
-        #     - name: cts-bootstrap
-        #       variables:
-        #         - name: device_name
-        #           value: BORDER.cisco.eu
-        #         - name: cts_password
-        #           value: C1sco12345
+        dayn_templates:
+          regular:
+            - name: cts-bootstrap
+              variables:
+                - name: device_name
+                  value: BORDER.cisco.eu
+                - name: cts_password
+                  value: C1sco12345
 
       - name: EDGE01.cisco.eu
         fqdn_name: EDGE01.cisco.eu
@@ -80,19 +80,19 @@ catalyst_center:
         fabric_roles:
           - EDGE_NODE
         # Phase 4: uncomment for access port + CTS template
-        # port_assignments:
-        #   - interface_name: GigabitEthernet1/0/1
-        #     connected_device_type: USER_DEVICE
-        #     data_vlan_name: VLAN_EMPLOYEES
-        #     authenticate_template_name: "No Authentication"
-        # dayn_templates:
-        #   regular:
-        #     - name: cts-bootstrap
-        #       variables:
-        #         - name: device_name
-        #           value: EDGE01.cisco.eu
-        #         - name: cts_password
-        #           value: C1sco12345
+        port_assignments:
+          - interface_name: GigabitEthernet1/0/1
+            connected_device_type: USER_DEVICE
+            data_vlan_name: VLAN_EMPLOYEES
+            authenticate_template_name: "No Authentication"
+        dayn_templates:
+          regular:
+            - name: cts-bootstrap
+              variables:
+                - name: device_name
+                  value: EDGE01.cisco.eu
+                - name: cts_password
+                  value: C1sco12345
 
       - name: EDGE02.cisco.eu
         fqdn_name: EDGE02.cisco.eu
@@ -105,19 +105,19 @@ catalyst_center:
         fabric_roles:
           - EDGE_NODE
         # Phase 4: uncomment for access port + CTS template
-        # port_assignments:
-        #   - interface_name: GigabitEthernet1/0/1
-        #     connected_device_type: USER_DEVICE
-        #     data_vlan_name: VLAN_SERVERS
-        #     authenticate_template_name: "No Authentication"
-        # dayn_templates:
-        #   regular:
-        #     - name: cts-bootstrap
-        #       variables:
-        #         - name: device_name
-        #           value: EDGE02.cisco.eu
-        #         - name: cts_password
-        #           value: C1sco12345
+        port_assignments:
+          - interface_name: GigabitEthernet1/0/1
+            connected_device_type: USER_DEVICE
+            data_vlan_name: VLAN_SERVERS
+            authenticate_template_name: "No Authentication"
+        dayn_templates:
+          regular:
+            - name: cts-bootstrap
+              variables:
+                - name: device_name
+                  value: EDGE02.cisco.eu
+                - name: cts_password
+                  value: C1sco12345
 
       # ─────────────────────── Fabric B ───────────────────────
       - name: FIAB.cisco.eu
@@ -133,16 +133,16 @@ catalyst_center:
           - CONTROL_PLANE_NODE
           - EDGE_NODE
         # Phase 4: uncomment for access port + CTS template
-        # port_assignments:
-        #   - interface_name: GigabitEthernet1/0/1
-        #     connected_device_type: USER_DEVICE
-        #     data_vlan_name: VLAN_CAMERAS
-        #     authenticate_template_name: "No Authentication"
-        # dayn_templates:
-        #   regular:
-        #     - name: cts-bootstrap
-        #       variables:
-        #         - name: device_name
-        #           value: FIAB.cisco.eu
-        #         - name: cts_password
-        #           value: C1sco12345
+        port_assignments:
+          - interface_name: GigabitEthernet1/0/1
+            connected_device_type: USER_DEVICE
+            data_vlan_name: VLAN_CAMERAS
+            authenticate_template_name: "No Authentication"
+        dayn_templates:
+          regular:
+            - name: cts-bootstrap
+              variables:
+                - name: device_name
+                  value: FIAB.cisco.eu
+                - name: cts_password
+                  value: C1sco12345
