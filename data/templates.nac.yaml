@@ -12,6 +12,7 @@
 # multidomain/catc/data/devices.nac.yaml under each device's `dayn_templates`
 # block. Templates live in catc because the catc pipeline owns CC template
 # objects; devices live in multidomain because they have BORDER_NODE roles.
+
 catalyst_center:
   templates:
     projects:
