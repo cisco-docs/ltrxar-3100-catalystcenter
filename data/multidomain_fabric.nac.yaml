@@ -1,3 +1,4 @@
+---
 # ============================================================================
 # MULTIDOMAIN OVERLAY — SDA fabric topology + L3 handoffs to SDWAN
 #
@@ -32,8 +33,6 @@
 #
 # In VS Code: select the YAML body block, Cmd/Ctrl+/.
 # ============================================================================
-
----
 catalyst_center:
   fabric:
     l3_virtual_networks:

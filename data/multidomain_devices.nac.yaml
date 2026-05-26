@@ -1,3 +1,4 @@
+---
 # ============================================================================
 # MULTIDOMAIN OVERLAY — SDA fabric device inventory
 #
@@ -34,8 +35,6 @@
 # CONTROL_PLANE_NODE in the fabric before any EDGE_NODE can be added, AND
 # CP+EDGE alone is rejected. So BORDER.cisco.eu owns CP for Fabric A.
 # ============================================================================
-
----
 catalyst_center:
   inventory:
     devices:
