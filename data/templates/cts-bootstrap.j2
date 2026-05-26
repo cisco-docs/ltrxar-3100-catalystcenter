@@ -42,12 +42,26 @@
 !      reach the device. CC-pushed 'client 198.18.133.30 server-key'
 !      without vrf is left alone - harmless, never matches inbound CoA.
 !
-!   5. cts credentials id/password per-device, wired through the
-!      'device_name' and 'cts_password' Jinja variables declared in
-!      catc/data/templates.nac.yaml and supplied per-device in
-!      catc/data/multidomain_devices.nac.yaml. Stored in NVRAM keystore
-!      (not running-config) so CC drift-detection ignores it; redeploy
-!      with same values is a no-op.
+! NOTE: 'cts credentials id/password' is intentionally OMITTED here.
+! That command is a privileged EXEC command (it writes to NVRAM keystore,
+! not running-config), so it cannot be executed from configure-terminal
+! mode where CC pushes templates. Pushing it via this template fails
+! with '%Invalid input detected at ^ marker' even though the syntax
+! looks correct - the rejection is because the command is unknown in
+! global-config mode, not because of bad arguments.
+!
+! Push it manually on each fabric device after the first successful
+! template deploy:
+!   <DEVICE># cts credentials id <hostname> password <cts_password>
+! Stored in NVRAM keystore (not running-config), so this only needs to
+! happen once per device lifetime (and persists across reboots).
+!
+! The 'device_name' and 'cts_password' variables declared in
+! catc/data/templates.nac.yaml are kept (passed per-device in
+! catc/data/multidomain_devices.nac.yaml) as placeholders / documentation
+! of the required per-device values, even though this template body no
+! longer consumes them. Future direction: if CC ever exposes an EXEC-
+! command-push primitive, swap the manual step for a template line.
 !
 ! COUPLING WARNING: the radius server name 'dnac-radius_198.18.133.30'
 ! below is what CC's standard provisioning produces from
@@ -56,9 +70,11 @@
 ! reference will break. CC also generates the actual shared_secret on
 ! its end - we never hardcode it here, only reference the server name.
 !
-! The per-device cts_password variable (in multidomain_devices.nac.yaml)
+! The cts_password variable per-device in multidomain_devices.nac.yaml
 ! MUST equal the ISE NAD trust_sec.device_password for that device
-! (currently C1sco12345 in ise/data/network_resources.nac.yaml).
+! (currently C1sco12345 in ise/data/network_resources.nac.yaml) - that
+! value is what the operator must type when manually running
+! 'cts credentials id <hostname> password <cts_password>'.
 ! ---------------------------------------------------------------------
 
 aaa group server radius CTS-RADIUS-GROUP
@@ -71,5 +87,3 @@ cts authorization list CTS-AUTHZ-LIST
 !
 aaa server radius dynamic-author
  client 198.18.133.30 vrf Mgmt-vrf server-key C1sco12345
-!
-cts credentials id {{ device_name }} password {{ cts_password }}
