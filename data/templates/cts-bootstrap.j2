@@ -42,17 +42,19 @@
 !      reach the device. CC-pushed 'client 198.18.133.30 server-key'
 !      without vrf is left alone - harmless, never matches inbound CoA.
 !
-! NOTE: 'cts credentials id/password' is intentionally OMITTED here.
+! NOTE: cts credentials id/password is intentionally OMITTED here.
 ! That command is a privileged EXEC command (it writes to NVRAM keystore,
 ! not running-config), so it cannot be executed from configure-terminal
 ! mode where CC pushes templates. Pushing it via this template fails
-! with '%Invalid input detected at ^ marker' even though the syntax
-! looks correct - the rejection is because the command is unknown in
-! global-config mode, not because of bad arguments.
+! because the command is unknown in global-config mode.
+!
+! IMPORTANT: do not paste literal IOS error output (containing % or ^
+! characters) into this template body - even inside ! comment lines,
+! CC NCTP rejects the line as invalid CLI before it reaches the device.
 !
 ! Push it manually on each fabric device after the first successful
 ! template deploy:
-!   <DEVICE># cts credentials id <hostname> password <cts_password>
+!   DEVICE# cts credentials id HOSTNAME password CTS_PASSWORD
 ! Stored in NVRAM keystore (not running-config), so this only needs to
 ! happen once per device lifetime (and persists across reboots).
 !
