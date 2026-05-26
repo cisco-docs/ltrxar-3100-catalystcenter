@@ -3,19 +3,70 @@
 ! TrustSec (classification, propagation, or enforcement).
 !
 ! Prerequisites (pushed by CC's standard provisioning, not here):
-!   - radius server ISE-RADIUS / key <shared_secret>     (from network_settings.aaa_servers)
-!   - aaa group server radius                            (CC creates from same config)
+!   - radius server dnac-radius_<ise_ip>                 (from network_settings.aaa_servers)
+!   - aaa group server radius dnac-client-radius-group   (CC creates from same config)
+!   - aaa server radius dynamic-author / client <ise_ip> (CC creates for CoA)
 !
 ! What this template adds:
-!   1. AAA method list named CTS-AUTHZ-LIST that uses the RADIUS group
-!   2. cts authorization list CTS-AUTHZ-LIST - tells CTS which AAA list to use
+!   1. Parallel RADIUS path (ISE-CTS server + CTS-RADIUS-GROUP) sourced
+!      from Gi0/0 in Mgmt-vrf. Required in this lab because CC's
+!      standard provisioning pushes 'ip radius source-interface
+!      Loopback0' in the global VRF - Loopback0 (RLOC) has no underlay
+!      route to ISE in this topology. Production SDA fabrics that reach
+!      ISE via the underlay can omit these blocks. The netascode catc
+!      schema does not expose source-interface/vrf knobs in
+!      network_settings.aaa_servers as of this version (verified against
+!      catc/schemas/schema.yaml lines 362-381), so a dayn_template is
+!      the SaC-supported escape hatch.
 !
-! NOTE: 'cts credentials id/password' is intentionally omitted here.
-! That command requires TrustSec to be initialized on the device first
-! (CTS PAC provisioning must complete via ISE before the command is valid).
-! Push it manually after the first successful CTS handshake:
-!   cts credentials id <device_name> password <cts_password>
+!      CC-managed 'dnac-*' RADIUS config is intentionally untouched so
+!      the CC pipeline does not drift it on subsequent applies.
+!
+!   2. AAA method list 'CTS-AUTHZ-LIST' bound to CTS-RADIUS-GROUP
+!      (replaces the previous 'group radius' binding, which inherited
+!      the broken global 'ip radius source-interface Loopback0').
+!
+!   3. cts authorization list CTS-AUTHZ-LIST
+!
+!   4. dynamic-author CoA listener with Mgmt-vrf so ISE matrix updates
+!      (RADIUS CoA, see ise/data/network_resources.nac.yaml
+!      send_configuration_to_device_using: ENABLE_USING_COA) actually
+!      reach the device. CC-pushed 'client 198.18.133.30 server-key'
+!      without vrf is left alone - harmless, never matches inbound CoA.
+!
+!   5. cts credentials id/password per-device, wired through the
+!      'device_name' and 'cts_password' Jinja variables declared in
+!      catc/data/templates.nac.yaml and supplied per-device in
+!      catc/data/multidomain_devices.nac.yaml. Stored in NVRAM keystore
+!      (not running-config) so CC drift-detection ignores it; redeploy
+!      with same values is a no-op. Earlier template comments warned
+!      against pushing this from a template - that turned out to be
+!      overcautious; the command accepts pre-CTS-init and is idempotent.
+!
+! COUPLING WARNING: ISE IP (198.18.133.30) and shared secret
+! (C1sco12345) below are HARDCODED for the LTRXAR-3100 lab. They MUST
+! stay in sync with:
+!   - catc/data/network_settings.nac.yaml  aaa_servers.primary_ip / shared_secret
+!   - ise/data/network_resources.nac.yaml  network_devices[*].radius.shared_secret
+!                                          network_devices[*].trust_sec.device_password
+! Change here = change in all three places. The per-device cts_password
+! variable (in multidomain_devices.nac.yaml) MUST equal the ISE NAD
+! trust_sec.device_password for that device.
 ! ---------------------------------------------------------------------
 
-aaa authorization network CTS-AUTHZ-LIST group radius
+radius server ISE-CTS
+ address ipv4 198.18.133.30 auth-port 1812 acct-port 1813
+ key C1sco12345
+!
+aaa group server radius CTS-RADIUS-GROUP
+ server name ISE-CTS
+ ip vrf forwarding Mgmt-vrf
+ ip radius source-interface GigabitEthernet0/0
+!
+aaa authorization network CTS-AUTHZ-LIST group CTS-RADIUS-GROUP
 cts authorization list CTS-AUTHZ-LIST
+!
+aaa server radius dynamic-author
+ client 198.18.133.30 vrf Mgmt-vrf server-key C1sco12345
+!
+cts credentials id {{ device_name }} password {{ cts_password }}
