@@ -127,7 +127,7 @@ plan:
 deploy:
   stage: deploy
   resource_group: catc
-  # when: manual
+  when: manual
   allow_failure: false
   script:
     - export TF_LOG=DEBUG
@@ -159,12 +159,12 @@ deploy:
     - if: '$CI_PIPELINE_SOURCE == "pipeline"'
       when: always
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-      when: always
+      when: manual
     # - if: '$CI_COMMIT_BRANCH == "master"'
     #   when: manual
     # - if: '$CI_COMMIT_BRANCH == "main"'
     #   when: manual
-    # - when: never
+    - when: never
 
 test-integration:
   stage: test
