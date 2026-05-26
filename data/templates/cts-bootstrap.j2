@@ -8,19 +8,27 @@
 !   - aaa server radius dynamic-author / client <ise_ip> (CC creates for CoA)
 !
 ! What this template adds:
-!   1. Parallel RADIUS path (ISE-CTS server + CTS-RADIUS-GROUP) sourced
-!      from Gi0/0 in Mgmt-vrf. Required in this lab because CC's
-!      standard provisioning pushes 'ip radius source-interface
-!      Loopback0' in the global VRF - Loopback0 (RLOC) has no underlay
-!      route to ISE in this topology. Production SDA fabrics that reach
-!      ISE via the underlay can omit these blocks. The netascode catc
-!      schema does not expose source-interface/vrf knobs in
-!      network_settings.aaa_servers as of this version (verified against
-!      catc/schemas/schema.yaml lines 362-381), so a dayn_template is
-!      the SaC-supported escape hatch.
+!   1. A second 'aaa group server radius' (CTS-RADIUS-GROUP) that REUSES
+!      the CC-managed 'radius server dnac-radius_<ise_ip>' entry but
+!      applies its own 'ip vrf forwarding Mgmt-vrf' and
+!      'ip radius source-interface GigabitEthernet0/0'. Required in this
+!      lab because CC's standard 'dnac-client-radius-group' is sourced
+!      from Loopback0 in the global VRF, which has no underlay route to
+!      ISE in this CML topology. IOS allows multiple aaa-groups to wrap
+!      the same radius server with different VRF/source-interface
+!      overrides at the group level.
 !
-!      CC-managed 'dnac-*' RADIUS config is intentionally untouched so
-!      the CC pipeline does not drift it on subsequent applies.
+!      We do NOT create a second 'radius server' entry. IOS enforces
+!      uniqueness on <address, auth-port, acct-port> across all radius
+!      server entries, so a parallel server pointing at the same ISE IP
+!      is rejected with '%Server already exists with same address port
+!      combination'. Reusing the existing CC-managed server avoids this
+!      and keeps the shared_secret in a single place (CC's config).
+!
+!      The netascode catc schema does not expose source-interface/vrf
+!      knobs in network_settings.aaa_servers as of this version
+!      (verified against catc/schemas/schema.yaml lines 362-381), so a
+!      dayn_template is the SaC-supported escape hatch.
 !
 !   2. AAA method list 'CTS-AUTHZ-LIST' bound to CTS-RADIUS-GROUP
 !      (replaces the previous 'group radius' binding, which inherited
@@ -39,27 +47,22 @@
 !      catc/data/templates.nac.yaml and supplied per-device in
 !      catc/data/multidomain_devices.nac.yaml. Stored in NVRAM keystore
 !      (not running-config) so CC drift-detection ignores it; redeploy
-!      with same values is a no-op. Earlier template comments warned
-!      against pushing this from a template - that turned out to be
-!      overcautious; the command accepts pre-CTS-init and is idempotent.
+!      with same values is a no-op.
 !
-! COUPLING WARNING: ISE IP (198.18.133.30) and shared secret
-! (C1sco12345) below are HARDCODED for the LTRXAR-3100 lab. They MUST
-! stay in sync with:
-!   - catc/data/network_settings.nac.yaml  aaa_servers.primary_ip / shared_secret
-!   - ise/data/network_resources.nac.yaml  network_devices[*].radius.shared_secret
-!                                          network_devices[*].trust_sec.device_password
-! Change here = change in all three places. The per-device cts_password
-! variable (in multidomain_devices.nac.yaml) MUST equal the ISE NAD
-! trust_sec.device_password for that device.
+! COUPLING WARNING: the radius server name 'dnac-radius_198.18.133.30'
+! below is what CC's standard provisioning produces from
+! catc/data/network_settings.nac.yaml aaa_servers.primary_ip. If that
+! ISE IP changes, the server name CC generates changes too, and this
+! reference will break. CC also generates the actual shared_secret on
+! its end - we never hardcode it here, only reference the server name.
+!
+! The per-device cts_password variable (in multidomain_devices.nac.yaml)
+! MUST equal the ISE NAD trust_sec.device_password for that device
+! (currently C1sco12345 in ise/data/network_resources.nac.yaml).
 ! ---------------------------------------------------------------------
 
-radius server ISE-CTS
- address ipv4 198.18.133.30 auth-port 1812 acct-port 1813
- key C1sco12345
-!
 aaa group server radius CTS-RADIUS-GROUP
- server name ISE-CTS
+ server name dnac-radius_198.18.133.30
  ip vrf forwarding Mgmt-vrf
  ip radius source-interface GigabitEthernet0/0
 !
