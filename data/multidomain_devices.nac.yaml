@@ -8,19 +8,11 @@
 # Phase plan:
 #   Phase 1: file body fully commented. Catc deploys foundation only (sites,
 #            network_settings, templates library, IP pools).
-#   Phase 2: uncomment the entire YAML body below. Run from a shell:
-#              sed -i 's/^# //' data/multidomain_devices.nac.yaml
-#            Safe to run on the full file — this header is double-commented
-#            (`# #`) so one layer survives sed and the header stays a comment.
-#            Alternatively in VS Code: select the YAML body block, Cmd/Ctrl+/.
+#   Phase 2: uncomment the entire YAML body below.
+#            In VS Code: select the YAML body block, Cmd/Ctrl+/.
 #            Devices land in CC with state: INIT — terraform asserts they
 #            exist in inventory but does NOT push provisioning config.
 #            fabric_roles becomes active immediately.
-#            NOTE: with state: INIT, the module may or may not skip the
-#            catalystcenter_fabric_devices resource. If terraform plan shows
-#            fabric_devices.create with un-provisioned devices, expect the
-#            apply to fail with "Could not find device" — fall back to
-#            inline-commenting fabric_roles until Phase 3.
 #   Phase 3: flip every `state: INIT` to `state: PROVISION`. Devices get
 #            baseline config push + fabric membership + L3 handoffs (the
 #            border_devices block in multidomain_fabric.nac.yaml). BGP comes

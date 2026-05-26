@@ -70,10 +70,6 @@
 ! mode where CC pushes templates. Pushing it via this template fails
 ! because the command is unknown in global-config mode.
 !
-! IMPORTANT: do not paste literal IOS error output (containing % or ^
-! characters) into this template body - even inside ! comment lines,
-! CC NCTP rejects the line as invalid CLI before it reaches the device.
-!
 ! Push it manually on each fabric device after the first successful
 ! template deploy:
 !   DEVICE# cts credentials id HOSTNAME password CTS_PASSWORD
@@ -86,13 +82,6 @@
 ! of the required per-device values, even though this template body no
 ! longer consumes them. Future direction: if CC ever exposes an EXEC-
 ! command-push primitive, swap the manual step for a template line.
-!
-! COUPLING WARNING: the radius server name 'dnac-radius_198.18.133.30'
-! below is what CC's standard provisioning produces from
-! catc/data/network_settings.nac.yaml aaa_servers.primary_ip. If that
-! ISE IP changes, the server name CC generates changes too, and this
-! reference will break. CC also generates the actual shared_secret on
-! its end - we never hardcode it here, only reference the server name.
 !
 ! The cts_password variable per-device in multidomain_devices.nac.yaml
 ! MUST equal the ISE NAD trust_sec.device_password for that device

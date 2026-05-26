@@ -2,17 +2,11 @@
 # CC template projects — declarative metadata for templates whose Jinja
 # content lives in catc/data/templates/*.j2.
 #
-# cts-bootstrap pushes the CTS-specific CLI that CC's standard provisioning
+# cts-bootstrap pushes the CTS-specific CLI that CC's data model
 # doesn't manage:
-#   - aaa authorization network CTS-AUTHZ-LIST group radius
+#   - aaa authorization network CTS-AUTHZ-LIST group CTS-RADIUS-GROUP
 #   - cts authorization list CTS-AUTHZ-LIST
 #   - cts credentials id <device-name> password <secret>
-#
-# Devices reference this template (and pass per-device variables) in
-# multidomain/catc/data/devices.nac.yaml under each device's `dayn_templates`
-# block. Templates live in catc because the catc pipeline owns CC template
-# objects; devices live in multidomain because they have BORDER_NODE roles.
-
 catalyst_center:
   templates:
     projects:
