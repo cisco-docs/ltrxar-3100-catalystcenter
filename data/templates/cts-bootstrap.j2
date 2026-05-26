@@ -42,6 +42,28 @@
 !      reach the device. CC-pushed 'client 198.18.133.30 server-key'
 !      without vrf is left alone - harmless, never matches inbound CoA.
 !
+!   5. Override of CC-managed 'aaa group server radius dnac-client-radius-group'
+!      to use Mgmt-vrf and GigabitEthernet0/0 source. CTS PAC provisioning uses
+!      EAP-FAST through the DEFAULT radius path (not CTS-RADIUS-GROUP). The
+!      'cts authorization list' binding above only affects post-PAC authz
+!      queries (env-data, SGACL download). Without fixing dnac-client-radius
+!      -group itself, PAC provisioning packets get sourced from Loopback0 in
+!      global VRF and never reach ISE - PAC provisioning hangs forever with
+!      'aidlen = 0' in 'show cts provisioning'. Proven via per-device test on
+!      EDGE01/EDGE02: this is the single change that unlocks PAC.
+!
+!   6. Remove 'automate-tester' probe from the radius server entry. CC pushes
+!      'automate-tester username dummy ignore-acct-port probe-on' which sends
+!      periodic dead-server-detection probes. Those probes are sourced from
+!      the GLOBAL radius source-interface (Loopback0), not the per-group
+!      override. In this lab the global VRF has no underlay route to ISE, so
+!      the probes always fail. After 3 failures the server is marked DEAD
+!      GLOBALLY - which also poisons CTS-RADIUS-GROUP because server state is
+!      tracked per-server (address, port), not per-aaa-group. With the server
+!      stuck DEAD, CTS-RADIUS-GROUP short-circuits and refuses to even send.
+!      Removing the probe lets the server stay ALIVE and lets CTS-RADIUS-GROUP
+!      actually use it for env-data and SGACL downloads via Mgmt-vrf.
+!
 ! NOTE: cts credentials id/password is intentionally OMITTED here.
 ! That command is a privileged EXEC command (it writes to NVRAM keystore,
 ! not running-config), so it cannot be executed from configure-terminal
@@ -89,3 +111,11 @@ cts authorization list CTS-AUTHZ-LIST
 !
 aaa server radius dynamic-author
  client 198.18.133.30 vrf Mgmt-vrf server-key C1sco12345
+!
+aaa group server radius dnac-client-radius-group
+ no ip radius source-interface Loopback0
+ ip vrf forwarding Mgmt-vrf
+ ip radius source-interface GigabitEthernet0/0
+!
+radius server dnac-radius_198.18.133.30
+ no automate-tester username dummy ignore-acct-port probe-on
