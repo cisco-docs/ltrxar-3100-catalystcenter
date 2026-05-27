@@ -3,19 +3,108 @@
 ! TrustSec (classification, propagation, or enforcement).
 !
 ! Prerequisites (pushed by CC's standard provisioning, not here):
-!   - radius server ISE-RADIUS / key <shared_secret>     (from network_settings.aaa_servers)
-!   - aaa group server radius                            (CC creates from same config)
+!   - radius server dnac-radius_<ise_ip>                 (from network_settings.aaa_servers)
+!   - aaa group server radius dnac-client-radius-group   (CC creates from same config)
+!   - aaa server radius dynamic-author / client <ise_ip> (CC creates for CoA)
 !
 ! What this template adds:
-!   1. AAA method list named CTS-AUTHZ-LIST that uses the RADIUS group
-!   2. cts authorization list CTS-AUTHZ-LIST - tells CTS which AAA list to use
+!   1. A second 'aaa group server radius' (CTS-RADIUS-GROUP) that REUSES
+!      the CC-managed 'radius server dnac-radius_<ise_ip>' entry but
+!      applies its own 'ip vrf forwarding Mgmt-vrf' and
+!      'ip radius source-interface GigabitEthernet0/0'. Required in this
+!      lab because CC's standard 'dnac-client-radius-group' is sourced
+!      from Loopback0 in the global VRF, which has no underlay route to
+!      ISE in this CML topology. IOS allows multiple aaa-groups to wrap
+!      the same radius server with different VRF/source-interface
+!      overrides at the group level.
 !
-! NOTE: 'cts credentials id/password' is intentionally omitted here.
-! That command requires TrustSec to be initialized on the device first
-! (CTS PAC provisioning must complete via ISE before the command is valid).
-! Push it manually after the first successful CTS handshake:
-!   cts credentials id <device_name> password <cts_password>
+!      We do NOT create a second 'radius server' entry. IOS enforces
+!      uniqueness on <address, auth-port, acct-port> across all radius
+!      server entries, so a parallel server pointing at the same ISE IP
+!      is rejected with '%Server already exists with same address port
+!      combination'. Reusing the existing CC-managed server avoids this
+!      and keeps the shared_secret in a single place (CC's config).
+!
+!      The netascode catc schema does not expose source-interface/vrf
+!      knobs in network_settings.aaa_servers as of this version
+!      (verified against catc/schemas/schema.yaml lines 362-381), so a
+!      dayn_template is the SaC-supported escape hatch.
+!
+!   2. AAA method list 'CTS-AUTHZ-LIST' bound to CTS-RADIUS-GROUP
+!      (replaces the previous 'group radius' binding, which inherited
+!      the broken global 'ip radius source-interface Loopback0').
+!
+!   3. cts authorization list CTS-AUTHZ-LIST
+!
+!   4. dynamic-author CoA listener with Mgmt-vrf so ISE matrix updates
+!      (RADIUS CoA, see ise/data/network_resources.nac.yaml
+!      send_configuration_to_device_using: ENABLE_USING_COA) actually
+!      reach the device. CC-pushed 'client 198.18.133.30 server-key'
+!      without vrf is left alone - harmless, never matches inbound CoA.
+!
+!   5. Override of CC-managed 'aaa group server radius dnac-client-radius-group'
+!      to use Mgmt-vrf and GigabitEthernet0/0 source. CTS PAC provisioning uses
+!      EAP-FAST through the DEFAULT radius path (not CTS-RADIUS-GROUP). The
+!      'cts authorization list' binding above only affects post-PAC authz
+!      queries (env-data, SGACL download). Without fixing dnac-client-radius
+!      -group itself, PAC provisioning packets get sourced from Loopback0 in
+!      global VRF and never reach ISE - PAC provisioning hangs forever with
+!      'aidlen = 0' in 'show cts provisioning'. Proven via per-device test on
+!      EDGE01/EDGE02: this is the single change that unlocks PAC.
+!
+!   6. Remove 'automate-tester' probe from the radius server entry. CC pushes
+!      'automate-tester username dummy ignore-acct-port probe-on' which sends
+!      periodic dead-server-detection probes. Those probes are sourced from
+!      the GLOBAL radius source-interface (Loopback0), not the per-group
+!      override. In this lab the global VRF has no underlay route to ISE, so
+!      the probes always fail. After 3 failures the server is marked DEAD
+!      GLOBALLY - which also poisons CTS-RADIUS-GROUP because server state is
+!      tracked per-server (address, port), not per-aaa-group. With the server
+!      stuck DEAD, CTS-RADIUS-GROUP short-circuits and refuses to even send.
+!      Removing the probe lets the server stay ALIVE and lets CTS-RADIUS-GROUP
+!      actually use it for env-data and SGACL downloads via Mgmt-vrf.
+!
+! NOTE: cts credentials id/password is intentionally OMITTED here.
+! That command is a privileged EXEC command (it writes to NVRAM keystore,
+! not running-config), so it cannot be executed from configure-terminal
+! mode where CC pushes templates. Pushing it via this template fails
+! because the command is unknown in global-config mode.
+!
+! Push it manually on each fabric device after the first successful
+! template deploy:
+!   DEVICE# cts credentials id HOSTNAME password CTS_PASSWORD
+! Stored in NVRAM keystore (not running-config), so this only needs to
+! happen once per device lifetime (and persists across reboots).
+!
+! The 'device_name' and 'cts_password' variables declared in
+! catc/data/templates.nac.yaml are kept (passed per-device in
+! catc/data/multidomain_devices.nac.yaml) as placeholders / documentation
+! of the required per-device values, even though this template body no
+! longer consumes them. Future direction: if CC ever exposes an EXEC-
+! command-push primitive, swap the manual step for a template line.
+!
+! The cts_password variable per-device in multidomain_devices.nac.yaml
+! MUST equal the ISE NAD trust_sec.device_password for that device
+! (currently C1sco12345 in ise/data/network_resources.nac.yaml) - that
+! value is what the operator must type when manually running
+! 'cts credentials id <hostname> password <cts_password>'.
 ! ---------------------------------------------------------------------
 
-aaa authorization network CTS-AUTHZ-LIST group radius
+aaa group server radius CTS-RADIUS-GROUP
+ server name dnac-radius_198.18.133.30
+ ip vrf forwarding Mgmt-vrf
+ ip radius source-interface GigabitEthernet0/0
+!
+aaa authorization network CTS-AUTHZ-LIST group CTS-RADIUS-GROUP
 cts authorization list CTS-AUTHZ-LIST
+!
+aaa server radius dynamic-author
+ client 198.18.133.30 vrf Mgmt-vrf server-key C1sco12345
+!
+aaa group server radius dnac-client-radius-group
+ no ip radius source-interface Loopback0
+ ip vrf forwarding Mgmt-vrf
+ ip radius source-interface GigabitEthernet0/0
+!
+radius server dnac-radius_198.18.133.30
+ no automate-tester username dummy ignore-acct-port probe-on

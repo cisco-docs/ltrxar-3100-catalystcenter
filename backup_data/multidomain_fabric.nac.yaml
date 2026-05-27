@@ -1,3 +1,4 @@
+---
 # ============================================================================
 # MULTIDOMAIN OVERLAY — SDA fabric topology + L3 handoffs to SDWAN
 #
@@ -23,21 +24,15 @@
 #
 # Each anycast gateway carries security_group_name (the default SG for hosts
 # in the pool) and group_based_policy_enforcement_enabled (the on-switch
-# enforcement toggle that downloads the ISE matrix). See design.md §6.
+# enforcement toggle that downloads the ISE matrix).
 #
 # Campus VN and IoT VN both terminate into SDWAN VPN30 at the L3 handoff
 # (border_devices block at the bottom). Cross-fabric L3 reachability is
 # therefore open; SGT alone provides segmentation between Cameras, IT_Admin,
 # and Servers.
 #
-# Activate (Phase 2): run from a shell:
-#   sed -i 's/^# //' data/multidomain_fabric.nac.yaml
-# Safe to run on the full file — this header is double-commented (`# #`)
-# so one layer survives sed and the header stays a comment.
-# Alternatively in VS Code: select the YAML body block, Cmd/Ctrl+/.
+# In VS Code: select the YAML body block, Cmd/Ctrl+/.
 # ============================================================================
-
----
 catalyst_center:
   fabric:
     l3_virtual_networks:

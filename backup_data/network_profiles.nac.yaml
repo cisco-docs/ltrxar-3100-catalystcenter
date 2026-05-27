@@ -7,10 +7,7 @@
 #   join Bld A / Bld B (Phase 2 INIT) and provision (Phase 3 PROVISION), the
 #   template is pushed automatically. Shipping the profile in Phase 1 means
 #   Phase 3 PROVISION pushes CTS bootstrap CLI in the same workflow, with no
-#   extra step. Matches the netascode/nac-catalystcenter-comprehensive-example
-#   lab pattern (network_profiles applied alongside templates/IP pools, before
-#   any device exists).
-#
+#   extra step.
 # This profile attaches cts-bootstrap to all switches in the two fabric
 # buildings. Per-device variables (device_name, cts_password) are passed via
 # inline `dayn_templates:` blocks on each device in multidomain_devices.nac.yaml

@@ -1,6 +1,6 @@
 ---
 # Two fabric sites under one Catalyst Center (multi-fabric pattern):
-#   Bld A = SDA Fabric A (BORDER + SDA-EDGE-01 + SDA-EDGE-02)
+#   Bld A = SDA Fabric A (BORDER + EDGE-01 + EDGE-02)
 #   Bld B = SDA Fabric B (FIAB only — fabric-in-a-box, all 3 roles)
 # AAA + telemetry inherit from Las Vegas. IP pool reservations must be at
 # the fabric site (building) level — CC rejects AGW creation against pools
